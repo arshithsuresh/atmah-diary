@@ -1,0 +1,33 @@
+@import 'theme';
+
+.diary-book-container {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  width: 750px;
+  height: 900px;
+  background-color: white;
+  position: relative;
+
+  .diary-hard-cover {
+    position: absolute;
+    border-radius: 14px;
+    background-color: #353535;
+    width: 736px;
+    height: 900px;
+    box-shadow: 10px 10px 26px rgba(0, 0, 0, 0.2);
+  }
+
+  .diary-main-content {
+    display: flex;
+    width: 736px;
+    height: 886px;
+    border-radius: 12px;
+    background-color: #eaeaea;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: rem-calc();
+    color: $text-color;
+  }
+}
