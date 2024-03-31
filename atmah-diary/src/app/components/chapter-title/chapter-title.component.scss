@@ -1,0 +1,24 @@
+.chapter-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .chapter-title {
+    text-align: right;
+    width: 70%;
+    min-width: 300px;
+    padding-right: 36px;
+    font-family: 'Fell English', serif;
+    user-select: none;
+
+    .title {
+      font-size: 38px;
+    }
+    .title-date {
+      margin-top: 8px;
+      font-size: 18px;
+    }
+  }
+}

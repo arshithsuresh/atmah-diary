@@ -1,7 +1,15 @@
 .diary-container {
   display: flex;
-  width: 100%;
+  flex: 2;
   height: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.title-container {
+  flex: 2;
+}
+
+.right-spacer {
+  flex: 1;
 }
