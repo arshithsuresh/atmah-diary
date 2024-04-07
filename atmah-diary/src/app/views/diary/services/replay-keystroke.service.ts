@@ -3,20 +3,34 @@ import { SingleLineData } from '../../../models/keystroke-data.model';
 import { testData } from '../diary/testData';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
+import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReplayKeystrokeService {
-  private isPaused: Subject<boolean> = new Subject();
+  private isPaused$: Subject<boolean> = new Subject();
   private pageData: SingleLineData = testData;
   private control!: FormControl;
 
-  private currentWaitIndex: number = 0;
-  private currentCharacterIndex: number = 0;
+  private speedX: number = 2;
 
+  private _currentWaitIndex: number = 0;
+  private _currentCharacterIndex: number = 0;
+  private _isPaused: boolean = false;
+
+  get waitTime() {
+    console.log('Waited', this.pageData.keyData[this._currentWaitIndex].w);
+    return this.pageData.keyData[this._currentWaitIndex++].w;
+  }
+
+  get done() {
+    return this._currentCharacterIndex >= this.pageData.keyData.length;
+  }
   constructor() {
-    this.isPaused.pipe().subscribe(paused => {
+    this.isPaused$.pipe().subscribe(paused => {
+      this._isPaused = paused;
       if (!paused) {
         this.startReplay();
       }
@@ -33,35 +47,39 @@ export class ReplayKeystrokeService {
     console.log('Starting replaying keystrokes');
 
     setTimeout(() => {
-      this.currentWaitIndex++;
       this.performTyping();
-    }, this.pageData.keyData[this.currentWaitIndex].w);
+    }, this.waitTime);
   }
 
   play() {
-    this.isPaused.next(false);
+    this.isPaused$.next(false);
   }
 
   pauseReplay() {
-    this.isPaused.next(true);
+    this.isPaused$.next(true);
   }
 
   getKeyStrokeData() {}
 
   performTyping() {
-    setTimeout(() => {
-      console.log(
-        `Waited : ${this.pageData.keyData[this.currentWaitIndex].w} to type ${
-          this.pageData.keyData[this.currentCharacterIndex].k
-        }`
-      );
-      this.control.setValue(
-        this.control.value + this.pageData.keyData[this.currentCharacterIndex].k
-      );
-      this.currentWaitIndex++;
-      this.currentCharacterIndex++;
+    if (this._isPaused) return;
 
+    const nextCharacter = this.pageData.keyData[this._currentCharacterIndex].k;
+    let newValue = this.control.value as string;
+
+    if (nextCharacter == KeyCodeMapping.get(AvailableKeyCodes.Backspace)) {
+      newValue = newValue.slice(0, newValue.length - 1);
+    } else {
+      newValue = this.control.value + nextCharacter;
+    }
+
+    this.control.setValue(newValue);
+    this._currentCharacterIndex++;
+
+    if (this.done) return;
+
+    setTimeout(() => {
       this.performTyping();
-    }, this.pageData.keyData[this.currentWaitIndex].w);
+    }, this.waitTime);
   }
 }

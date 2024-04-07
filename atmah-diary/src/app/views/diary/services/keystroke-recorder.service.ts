@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { KeyCode } from '../../../enum/keyboard-key.enum';
+import { AvailableKeyCodes, KeyCode } from '../../../enum/keyboard-key.enum';
 import {
   KeyCodeMapping,
   SpecialKeyMap,
 } from '../../../constants/keyboard-map.constatns';
 import { SingleLineData } from '../../../models/keystroke-data.model';
+import { isCharacter } from '../../../utils/stringFunctions';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +16,14 @@ export class KeystrokeRecorderService {
   constructor() {}
 
   recordKey(
-    key: KeyCode,
+    keycode: AvailableKeyCodes,
     waitTime: number,
     shift: boolean = false,
     ctrl: boolean = false
   ): [keyCharacter: string, waitTime: number] {
-    let keyCharacter = KeyCodeMapping.get(key)!;
+    let keyCharacter = KeyCodeMapping.get(keycode)!;
 
-    if (shift) {
+    if (shift && isCharacter(keyCharacter)) {
       keyCharacter = keyCharacter?.toUpperCase();
     }
 
@@ -32,5 +33,15 @@ export class KeystrokeRecorderService {
     });
 
     return [keyCharacter, waitTime];
+  }
+
+  checkKeyValid(keycode: AvailableKeyCodes, ctrl: boolean = false) {
+    const isAvailableKey = Object.values(AvailableKeyCodes).includes(
+      keycode as AvailableKeyCodes
+    );
+
+    const isValidKey = isAvailableKey && !ctrl;
+    console.log('Is valid ', isValidKey);
+    return isValidKey;
   }
 }
