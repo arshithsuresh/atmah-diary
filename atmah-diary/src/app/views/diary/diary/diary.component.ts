@@ -53,8 +53,9 @@ export class DiaryComponent implements OnInit, AfterViewInit {
 
   onKeyDown(event: KeyboardEvent) {
     if (
-      !Object.values(AvailableKeyCodes).includes(
-        event.code as AvailableKeyCodes
+      !this.keyStrokeRecorder.checkKeyValid(
+        event.code as AvailableKeyCodes,
+        event.ctrlKey
       )
     ) {
       event.preventDefault();
@@ -67,9 +68,10 @@ export class DiaryComponent implements OnInit, AfterViewInit {
       Math.min(currentTime - this._lastKeystrokeTime, 5000)
     );
 
-    console.log(`${event.key} ${event.shiftKey} : Interval : ${keyStrokeDiff}`);
+    console.log(`${event.key} ${event.code} : Interval : ${keyStrokeDiff}`);
+
     let [keyCharacter, waitTime] = this.keyStrokeRecorder.recordKey(
-      event.code as KeyCode,
+      event.code as AvailableKeyCodes,
       keyStrokeDiff,
       event.shiftKey
     );
