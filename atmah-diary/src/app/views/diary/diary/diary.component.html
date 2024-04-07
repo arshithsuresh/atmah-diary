@@ -57,7 +57,14 @@
             <hr />
           </div>
         </div>
-        <textarea id="" cols="30" spellcheck="false"></textarea>
+        <textarea
+          #diaryTextarea
+          id=""
+          cols="30"
+          spellcheck="false"
+          [formControl]="diaryControl"
+          (keydown)="onKeyDown($event)"
+          (click)="onMouseDown($event)"></textarea>
       </div>
     </div>
   </div>
