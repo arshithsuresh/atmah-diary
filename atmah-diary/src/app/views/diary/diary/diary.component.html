@@ -64,7 +64,8 @@
           spellcheck="false"
           [formControl]="diaryControl"
           (keydown)="onKeyDown($event)"
-          (click)="onMouseDown($event)"></textarea>
+          (click)="onMouseDown($event)"
+          (select)="onDragEnter($event)"></textarea>
       </div>
     </div>
   </div>

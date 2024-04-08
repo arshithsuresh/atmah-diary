@@ -52,12 +52,7 @@ export class DiaryComponent implements OnInit, AfterViewInit {
   }
 
   onKeyDown(event: KeyboardEvent) {
-    if (
-      !this.keyStrokeRecorder.checkKeyValid(
-        event.code as AvailableKeyCodes,
-        event.ctrlKey
-      )
-    ) {
+    if (!this.canRecordKeys(event)) {
       event.preventDefault();
       return;
     }
@@ -89,9 +84,31 @@ export class DiaryComponent implements OnInit, AfterViewInit {
   }
 
   onMouseDown(event: MouseEvent) {
-    const selectionStart = (event.target! as HTMLTextAreaElement)
-      .selectionStart;
-    const formLastPos = (this.diaryControl.value as string).length;
-    console.log(selectionStart, formLastPos);
+    const target = event.target! as HTMLTextAreaElement;
+    const selectionStart = target.selectionStart;
+
+    target.selectionStart = target.value.length;
+  }
+
+  canRecordKeys(event: KeyboardEvent) {
+    const canRecord =
+      this.keyStrokeRecorder.checkKeyValid(
+        event.code as AvailableKeyCodes,
+        event.ctrlKey
+      ) &&
+      this.checkIfAtEnd((event.target as HTMLInputElement).selectionStart!);
+
+    return canRecord;
+  }
+
+  checkIfAtEnd(cursorPos: number) {
+    return cursorPos == this.diaryControl.value.length;
+  }
+
+  onDragEnter($event: Event) {
+    $event.preventDefault();
+    ($event.target as HTMLInputElement).selectionStart = (
+      $event.target as HTMLInputElement
+    ).value.length;
   }
 }

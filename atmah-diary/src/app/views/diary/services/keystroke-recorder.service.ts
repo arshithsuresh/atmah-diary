@@ -41,7 +41,7 @@ export class KeystrokeRecorderService {
     );
 
     const isValidKey = isAvailableKey && !ctrl;
-    console.log('Is valid ', isValidKey);
+
     return isValidKey;
   }
 }

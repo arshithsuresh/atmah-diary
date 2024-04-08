@@ -20,9 +20,16 @@ export class ReplayKeystrokeService {
   private _currentCharacterIndex: number = 0;
   private _isPaused: boolean = false;
 
+  set speed(value: number) {
+    this.speedX = value;
+  }
+
+  get speed() {
+    return this.speedX;
+  }
+
   get waitTime() {
-    console.log('Waited', this.pageData.keyData[this._currentWaitIndex].w);
-    return this.pageData.keyData[this._currentWaitIndex++].w;
+    return this.pageData.keyData[this._currentWaitIndex++].w / this.speedX;
   }
 
   get done() {
