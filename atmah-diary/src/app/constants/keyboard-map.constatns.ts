@@ -60,6 +60,7 @@ export const KeyCodeMapping: Map<AvailableKeyCodes | KeyCode, string> = new Map(
     [AvailableKeyCodes.Numpad7, '7'],
     [AvailableKeyCodes.Numpad8, '8'],
     [AvailableKeyCodes.Numpad9, '9'],
+
     [AvailableKeyCodes.NumpadMultiply, '*'], // Asterisk (*) on numeric keypad
     [AvailableKeyCodes.NumpadAdd, '+'], // Plus sign (+) on numeric keypad
     [AvailableKeyCodes.NumpadSubtract, '-'], // Minus sign (-) on numeric keypad

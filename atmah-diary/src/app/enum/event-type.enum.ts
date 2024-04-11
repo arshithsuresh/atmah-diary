@@ -1,0 +1,4 @@
+export enum RECORDING_EVENTS {
+  DIARY_EDIT,
+  TITLE_EDIT,
+}
