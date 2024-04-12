@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { MediaButtonsModule } from '../media-buttons/media-buttons.module';
 
 @Component({
   selector: 'atmah-chapter-title',
   standalone: true,
-  imports: [],
+  imports: [MediaButtonsModule],
   templateUrl: './chapter-title.component.html',
-  styleUrl: './chapter-title.component.scss'
+  styleUrl: './chapter-title.component.scss',
 })
-export class ChapterTitleComponent {
-
-}
+export class ChapterTitleComponent {}

@@ -8,9 +8,7 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs';
 import { SingleLineData } from '../../../models/keystroke-data.model';
-import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
-import { AvailableKeyCodes, KeyCode } from '../../../enum/keyboard-key.enum';
-import { testData } from './testData';
+import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { KeystrokeRecorderService } from '../services/keystroke-recorder.service';
 import { ReplayKeystrokeService } from '../services/replay-keystroke.service';
 
@@ -36,6 +34,7 @@ export class DiaryComponent implements OnInit, AfterViewInit {
     this._lastKeystrokeTime = Date.now();
     this.singleLinedata = { keyData: [], nextData: null };
   }
+
   ngAfterViewInit(): void {
     this.performTyping();
   }

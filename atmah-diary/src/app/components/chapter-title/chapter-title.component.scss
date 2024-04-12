@@ -1,5 +1,6 @@
 .chapter-title-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -14,6 +15,7 @@
     user-select: none;
 
     .title {
+      text-align: right;
       font-size: 38px;
       font-family: 'Fell English', serif;
       border: none;
@@ -25,5 +27,15 @@
       margin-top: 8px;
       font-size: 18px;
     }
+  }
+
+  .media-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 70%;
+    min-width: 300px;
+    padding-right: 36px;
+    margin-top: 8px;
   }
 }
