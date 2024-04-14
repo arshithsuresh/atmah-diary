@@ -22,7 +22,11 @@
       text-decoration: none;
       resize: none;
       outline: none;
+      width: 100%;
+      min-height: 96px;
+      min-width: 310px;
     }
+
     .title-date {
       margin-top: 8px;
       font-size: 18px;
