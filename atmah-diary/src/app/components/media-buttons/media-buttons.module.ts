@@ -5,6 +5,9 @@ import { PauseButtonComponent } from './pause-button/pause-button.component';
 import { FastForwardButtonComponent } from './fast-forward-button/fast-forward-button.component';
 import { FastBackwardButtonComponent } from './fast-backward-button/fast-backward-button.component';
 import { MediaControlComponent } from './media-control.component';
+import { RecordButtonComponent } from './record-button/record-button.component';
+import { IMediaControlService } from '../../iservices/IMediaControlService';
+import { MediaControlService } from './services/media-control.service';
 
 @NgModule({
   declarations: [
@@ -13,8 +16,15 @@ import { MediaControlComponent } from './media-control.component';
     FastForwardButtonComponent,
     FastBackwardButtonComponent,
     MediaControlComponent,
+    RecordButtonComponent,
   ],
   imports: [CommonModule],
+  providers: [
+    {
+      provide: IMediaControlService,
+      useClass: MediaControlService,
+    },
+  ],
   exports: [
     PlayButtonComponent,
     PauseButtonComponent,

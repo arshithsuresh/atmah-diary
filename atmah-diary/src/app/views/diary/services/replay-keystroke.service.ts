@@ -8,39 +8,23 @@ import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
 
 @Injectable()
-export class ReplayKeystrokeService implements IReplayService {
-  private isPaused$: Subject<boolean> = new Subject();
+export class ReplayKeystrokeService extends IReplayService {
   private pageData: SingleLineData = testData;
   private control!: FormControl;
 
-  private speedX: number = 2;
-
   private _currentWaitIndex: number = 0;
   private _currentCharacterIndex: number = 0;
-  private _isPaused: boolean = false;
-
-  set speed(value: number) {
-    this.speedX = value;
-  }
-
-  get speed() {
-    return this.speedX;
-  }
 
   get waitTime() {
-    return this.pageData.keyData[this._currentWaitIndex++].w / this.speedX;
+    return this.pageData.keyData[this._currentWaitIndex].w / this.speedX;
   }
 
   get done() {
     return this._currentCharacterIndex >= this.pageData.keyData.length;
   }
+
   constructor() {
-    this.isPaused$.pipe().subscribe(paused => {
-      this._isPaused = paused;
-      if (!paused) {
-        this.startReplay();
-      }
-    });
+    super();
   }
 
   setControl(control: FormControl) {
@@ -55,14 +39,6 @@ export class ReplayKeystrokeService implements IReplayService {
     setTimeout(() => {
       this.performTyping();
     }, this.waitTime);
-  }
-
-  play() {
-    this.isPaused$.next(false);
-  }
-
-  pauseReplay() {
-    this.isPaused$.next(true);
   }
 
   getKeyStrokeData() {}
@@ -81,11 +57,16 @@ export class ReplayKeystrokeService implements IReplayService {
 
     this.control.setValue(newValue);
     this._currentCharacterIndex++;
+    this._currentWaitIndex++;
 
     if (this.done) return;
 
     setTimeout(() => {
       this.performTyping();
     }, this.waitTime);
+  }
+
+  speedControl(newSpeed: number): number {
+    return Math.min(Math.max(newSpeed, 1 / 4), 4);
   }
 }
