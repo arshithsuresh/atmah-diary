@@ -5,4 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './media-control.component.html',
   styleUrl: './media-control.component.scss',
 })
-export class MediaControlComponent {}
+export class MediaControlComponent {
+  constructor() {}
+
+  onPlayClick() {}
+  onPauseClick() {}
+  onFForwardClick() {}
+  onFBackwardClick() {}
+}

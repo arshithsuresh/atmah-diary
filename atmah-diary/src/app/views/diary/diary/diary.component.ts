@@ -9,8 +9,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs';
 import { SingleLineData } from '../../../models/keystroke-data.model';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
-import { KeystrokeRecorderService } from '../services/keystroke-recorder.service';
-import { ReplayKeystrokeService } from '../services/replay-keystroke.service';
+import { IReplayService } from '../../../iservices/IReplayService';
+import { IRecorderService } from '../../../iservices/IRecorderService';
 
 @Component({
   selector: 'atmah-diary',
@@ -28,8 +28,8 @@ export class DiaryComponent implements OnInit, AfterViewInit {
   private singleLinedata: SingleLineData;
 
   constructor(
-    private keyStrokeRecorder: KeystrokeRecorderService,
-    private keyReplay: ReplayKeystrokeService
+    private keyStrokeRecorder: IRecorderService,
+    private keyReplay: IReplayService
   ) {
     this._lastKeystrokeTime = Date.now();
     this.singleLinedata = { keyData: [], nextData: null };

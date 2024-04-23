@@ -7,9 +7,7 @@ import {
 import { SingleLineData } from '../../../models/keystroke-data.model';
 import { isCharacter } from '../../../utils/stringFunctions';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class KeystrokeRecorderService {
   pageData: SingleLineData = { keyData: [], nextData: null };
 
@@ -35,7 +33,7 @@ export class KeystrokeRecorderService {
     return [keyCharacter, waitTime];
   }
 
-  checkKeyValid(keycode: AvailableKeyCodes, ctrl: boolean = false) {
+  checkKeyValid(keycode: AvailableKeyCodes, ctrl: boolean = false): boolean {
     const isAvailableKey = Object.values(AvailableKeyCodes).includes(
       keycode as AvailableKeyCodes
     );

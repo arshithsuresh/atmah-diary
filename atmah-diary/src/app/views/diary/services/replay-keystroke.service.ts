@@ -5,11 +5,10 @@ import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
+import { IReplayService } from '../../../iservices/IReplayService';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ReplayKeystrokeService {
+@Injectable()
+export class ReplayKeystrokeService implements IReplayService {
   private isPaused$: Subject<boolean> = new Subject();
   private pageData: SingleLineData = testData;
   private control!: FormControl;
