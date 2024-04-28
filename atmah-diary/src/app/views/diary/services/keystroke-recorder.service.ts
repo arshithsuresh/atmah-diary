@@ -10,13 +10,17 @@ import { IRecorderService } from '../../../iservices/IRecorderService';
 
 @Injectable()
 export class KeystrokeRecorderService extends IRecorderService {
-  private _lastActionTime: number;
+  private _lastActionTime: number = -1;
 
   pageData: SingleLineData = { keyData: [], nextData: null };
 
   constructor() {
     super();
-    this._lastActionTime = Date.now();
+    this.canRecord$.subscribe(canRecord => {
+      if (canRecord) {
+        this._lastActionTime = Date.now();
+      }
+    });
   }
 
   recordAction(event: KeyboardEvent) {
