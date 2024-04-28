@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Injectable()
-export abstract class IReplayService {
+export abstract class IReplayService implements OnDestroy {
   protected speedX: number = 2;
-  protected isPaused$: Subject<boolean> = new Subject();
-  protected _isPaused: boolean = false;
+  protected _isPaused: Subject<boolean> = new Subject();
+  protected isPaused: boolean = false;
+
+  private _destroyed = new Subject<void>();
+  protected destroyed$ = this._destroyed.asObservable();
+  protected _isPaused$ = this._isPaused.pipe(takeUntil(this.destroyed$));
 
   set speed(value: number) {
     console.log(`New Speed ${this.speedControl(value)}`);
@@ -17,8 +21,8 @@ export abstract class IReplayService {
     return this.speedX;
   }
 
-  get isPaused() {
-    return this._isPaused;
+  get paused() {
+    return this.isPaused;
   }
 
   abstract startReplay(): void;
@@ -27,8 +31,8 @@ export abstract class IReplayService {
   abstract speedControl(newSpeed: number): number;
 
   constructor() {
-    this.isPaused$.pipe().subscribe(paused => {
-      this._isPaused = paused;
+    this._isPaused$.subscribe(paused => {
+      this.isPaused = paused;
       if (!paused) {
         this.startReplay();
       }
@@ -44,11 +48,15 @@ export abstract class IReplayService {
 
   play() {
     console.log('Resumed Playing!');
-    this.isPaused$.next(false);
+    this._isPaused.next(false);
   }
 
   pauseReplay() {
     console.log('Paused Playing!');
-    this.isPaused$.next(true);
+    this._isPaused.next(true);
+  }
+  ngOnDestroy(): void {
+    this._destroyed.next();
+    this._destroyed.complete();
   }
 }

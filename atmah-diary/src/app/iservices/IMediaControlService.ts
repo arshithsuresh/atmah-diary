@@ -8,7 +8,7 @@ export abstract class IMediaControlService {
     return this._replayServiceBase.speed;
   }
   get isPaused(): boolean {
-    return this._replayServiceBase.isPaused;
+    return this._replayServiceBase.paused;
   }
 
   constructor(

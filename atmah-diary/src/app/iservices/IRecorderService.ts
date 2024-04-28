@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AvailableKeyCodes } from '../enum/keyboard-key.enum';
 import { SingleLineData } from '../models/keystroke-data.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 @Injectable()
-export abstract class IRecorderService {
+export abstract class IRecorderService implements OnDestroy {
   private _canRecord: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  canRecord$ = this._canRecord.asObservable();
+  private _destroyed: Subject<void> = new Subject();
+  canRecord$ = this._canRecord.pipe(takeUntil(this._destroyed));
+
   get canRecord() {
     return this._canRecord.value;
   }
@@ -18,6 +20,11 @@ export abstract class IRecorderService {
   stopRecording() {
     this._canRecord.next(false);
     this._canRecord.value;
+  }
+
+  ngOnDestroy(): void {
+    this._destroyed.next();
+    this._destroyed.complete();
   }
 
   abstract pageData: SingleLineData;

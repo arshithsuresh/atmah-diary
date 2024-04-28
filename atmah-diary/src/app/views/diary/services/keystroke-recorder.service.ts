@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AvailableKeyCodes, KeyCode } from '../../../enum/keyboard-key.enum';
-import {
-  KeyCodeMapping,
-  SpecialKeyMap,
-} from '../../../constants/keyboard-map.constatns';
+import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
+import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
 import { SingleLineData } from '../../../models/keystroke-data.model';
 import { isCharacter } from '../../../utils/stringFunctions';
 import { IRecorderService } from '../../../iservices/IRecorderService';

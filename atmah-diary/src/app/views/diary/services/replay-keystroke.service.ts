@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { SingleLineData } from '../../../models/keystroke-data.model';
 import { testData } from '../diary/testData';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
 import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
@@ -44,7 +43,7 @@ export class ReplayKeystrokeService extends IReplayService {
   getKeyStrokeData() {}
 
   performTyping() {
-    if (this._isPaused) return;
+    if (this.paused) return;
 
     const nextCharacter = this.pageData.keyData[this._currentCharacterIndex].k;
     let newValue = this.control.value as string;
