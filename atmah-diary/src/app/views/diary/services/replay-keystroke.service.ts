@@ -32,7 +32,7 @@ export class ReplayKeystrokeService extends IReplayService {
   }
 
   startReplay() {
-    if (!(this.control || this.pageData)) return;
+    if (!(this.control || this.pageData) || this.done) return;
 
     console.log('Starting replaying keystrokes');
 
@@ -67,6 +67,6 @@ export class ReplayKeystrokeService extends IReplayService {
   }
 
   speedControl(newSpeed: number): number {
-    return Math.min(Math.max(newSpeed, 1 / 4), 4);
+    return Math.min(Math.max(newSpeed, 1 / 4), 8);
   }
 }

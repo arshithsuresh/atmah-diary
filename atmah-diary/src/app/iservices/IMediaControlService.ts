@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IReplayService } from './IReplayService';
+import { IRecorderService } from './IRecorderService';
 
 @Injectable()
 export abstract class IMediaControlService {
@@ -10,10 +11,21 @@ export abstract class IMediaControlService {
     return this._replayServiceBase.isPaused;
   }
 
-  constructor(private _replayServiceBase: IReplayService) {}
+  constructor(
+    private _replayServiceBase: IReplayService,
+    private _recorderServiceBase: IRecorderService
+  ) {}
 
   abstract play(): void;
   abstract pause(): void;
+
+  startRecording() {
+    this._recorderServiceBase.startRecording();
+  }
+
+  stopRecording() {
+    this._recorderServiceBase.stopRecording();
+  }
 
   fastForward() {
     this._replayServiceBase.fastForward();

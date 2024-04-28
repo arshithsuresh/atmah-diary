@@ -23,17 +23,11 @@ export class DiaryComponent implements OnInit, AfterViewInit {
   @ViewChild('diaryTextarea') diaryTextarea!: ElementRef;
 
   diaryControl: FormControl = new FormControl('');
-  private _lastKeystrokeTime: number;
-
-  private singleLinedata: SingleLineData;
 
   constructor(
     private keyStrokeRecorder: IRecorderService,
     private keyReplay: IReplayService
-  ) {
-    this._lastKeystrokeTime = Date.now();
-    this.singleLinedata = { keyData: [], nextData: null };
-  }
+  ) {}
 
   ngAfterViewInit(): void {
     this.performTyping();
@@ -56,36 +50,15 @@ export class DiaryComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    const currentTime = Date.now();
-    const keyStrokeDiff = Math.max(
-      10,
-      Math.min(currentTime - this._lastKeystrokeTime, 5000)
-    );
-
-    console.log(`${event.key} ${event.code} : Interval : ${keyStrokeDiff}`);
-
-    let [keyCharacter, waitTime] = this.keyStrokeRecorder.recordKey(
-      event.code as AvailableKeyCodes,
-      keyStrokeDiff,
-      event.shiftKey
-    );
-
-    this.singleLinedata.keyData.push({
-      k: keyCharacter,
-      w: waitTime,
-    });
+    this.keyStrokeRecorder.recordAction(event);
 
     if (event.code == 'Enter') {
-      console.log(this.singleLinedata);
+      console.log(this.keyStrokeRecorder.pageData.keyData);
     }
-
-    this._lastKeystrokeTime = Date.now();
   }
 
   onMouseDown(event: MouseEvent) {
     const target = event.target! as HTMLTextAreaElement;
-    const selectionStart = target.selectionStart;
-
     target.selectionStart = target.value.length;
   }
 

@@ -6,9 +6,23 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './record-button.component.scss',
 })
 export class RecordButtonComponent {
-  @Output() clicked: EventEmitter<void> = new EventEmitter();
+  @Output() onRecord: EventEmitter<void> = new EventEmitter();
+  @Output() onStop: EventEmitter<void> = new EventEmitter();
 
+  recording: boolean = false;
+  recordingColor: string = '#B91F1F';
+  nonRecordingColor: string = '#000000';
+
+  get buttonColor() {
+    return this.recording ? this.recordingColor : this.nonRecordingColor;
+  }
   onClick() {
-    this.clicked.emit();
+    if (this.recording) {
+      this.onStop.emit();
+    } else {
+      this.onRecord.emit();
+    }
+
+    this.recording = !this.recording;
   }
 }

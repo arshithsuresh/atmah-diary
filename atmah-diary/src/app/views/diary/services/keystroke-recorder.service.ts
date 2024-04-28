@@ -6,12 +6,41 @@ import {
 } from '../../../constants/keyboard-map.constatns';
 import { SingleLineData } from '../../../models/keystroke-data.model';
 import { isCharacter } from '../../../utils/stringFunctions';
+import { IRecorderService } from '../../../iservices/IRecorderService';
 
 @Injectable()
-export class KeystrokeRecorderService {
+export class KeystrokeRecorderService extends IRecorderService {
+  private _lastActionTime: number;
+
   pageData: SingleLineData = { keyData: [], nextData: null };
 
-  constructor() {}
+  constructor() {
+    super();
+    this._lastActionTime = Date.now();
+  }
+
+  recordAction(event: KeyboardEvent) {
+    if (!this.canRecord) return;
+
+    const currentTime = Date.now();
+    const keyStrokeDiff = Math.max(
+      10,
+      Math.min(currentTime - this._lastActionTime, 5000)
+    );
+
+    let [keyCharacter, waitTime] = this.recordKey(
+      event.code as AvailableKeyCodes,
+      keyStrokeDiff,
+      event.shiftKey
+    );
+
+    this.pageData.keyData.push({
+      k: keyCharacter,
+      w: waitTime,
+    });
+
+    this._lastActionTime = Date.now();
+  }
 
   recordKey(
     keycode: AvailableKeyCodes,

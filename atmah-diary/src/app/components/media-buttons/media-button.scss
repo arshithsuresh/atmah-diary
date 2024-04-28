@@ -6,7 +6,8 @@ button {
   height: 35px;
   position: relative;
 
-  img {
+  img,
+  svg {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -17,7 +18,8 @@ button {
   }
 
   &:hover {
-    img {
+    img,
+    svg {
       filter: invert(0.2);
       width: 30px;
       height: 30px;

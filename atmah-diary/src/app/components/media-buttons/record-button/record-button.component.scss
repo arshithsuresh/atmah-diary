@@ -1,1 +1,7 @@
 @import '../media-button.scss';
+
+svg {
+  path {
+    transition: all ease-in-out 0.2s;
+  }
+}

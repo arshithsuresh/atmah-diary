@@ -20,15 +20,26 @@ export class MediaControlComponent {
 
     this._mediaControl.play();
   }
+
   onPauseClick() {
     if (this.isPaused) return;
 
     this._mediaControl.pause();
   }
+
   onFForwardClick() {
     this._mediaControl.fastForward();
   }
+
   onFBackwardClick() {
     this._mediaControl.fastBackward();
+  }
+
+  onStartRecording() {
+    this._mediaControl.startRecording();
+  }
+
+  onStopRecording() {
+    this._mediaControl.stopRecording();
   }
 }
