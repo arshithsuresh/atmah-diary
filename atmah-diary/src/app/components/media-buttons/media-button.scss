@@ -5,6 +5,7 @@ button {
   width: 35px;
   height: 35px;
   position: relative;
+  animation: 0.3s ease-out 0s 1 entryAnimation;
 
   img,
   svg {
@@ -24,5 +25,17 @@ button {
       width: 30px;
       height: 30px;
     }
+  }
+}
+
+@keyframes entryAnimation {
+  0% {
+    transform: scale(0%);
+  }
+  90% {
+    transform: scale(120%);
+  }
+  100% {
+    transform: scale(100%);
   }
 }

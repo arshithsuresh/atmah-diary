@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { DiaryViewComponent } from './views/diary/diary-view.component';
-import { DiaryViewModule } from './views/diary/diary-view.module';
 
 export const routes: Routes = [
   {

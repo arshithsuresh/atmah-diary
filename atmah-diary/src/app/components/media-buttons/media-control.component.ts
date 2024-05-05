@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { IMediaControlService } from '../../iservices/IMediaControlService';
+import { CAN_RECORD_TOKEN } from '../../tokens/can-record.token';
 
 @Component({
   selector: 'atmah-media-control',
@@ -10,10 +11,19 @@ export class MediaControlComponent {
   get isPaused() {
     return this._mediaControl.isPaused;
   }
+
   get speed() {
     return this._mediaControl.currentSpeed;
   }
-  constructor(private _mediaControl: IMediaControlService) {}
+
+  get canRecord() {
+    return this._canRecord;
+  }
+
+  constructor(
+    private _mediaControl: IMediaControlService,
+    @Optional() @Inject(CAN_RECORD_TOKEN) private _canRecord: boolean = false
+  ) {}
 
   onPlayClick() {
     if (!this.isPaused) return;
@@ -36,6 +46,8 @@ export class MediaControlComponent {
   }
 
   onStartRecording() {
+    if (!this.canRecord) return;
+
     this._mediaControl.startRecording();
   }
 

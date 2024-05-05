@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs';
-import { SingleLineData } from '../../../models/keystroke-data.model';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
 import { IRecorderService } from '../../../iservices/IRecorderService';

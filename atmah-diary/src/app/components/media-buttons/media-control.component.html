@@ -3,6 +3,6 @@
   <atmah-play-button *ngIf="isPaused" (clicked)="onPlayClick()" />
   <atmah-pause-button *ngIf="!isPaused" (clicked)="onPauseClick()" />
   <atmah-fast-forward-button (clicked)="onFForwardClick()" />
-  <atmah-record-button />
+  <atmah-record-button *ngIf="canRecord" />
 </div>
 <div class="speed-control">speed {{ speed }}x</div>
