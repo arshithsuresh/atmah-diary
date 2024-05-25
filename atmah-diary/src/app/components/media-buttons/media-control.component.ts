@@ -17,12 +17,12 @@ export class MediaControlComponent {
   }
 
   get canRecord() {
-    return this._canRecord;
+    return this._isInEditMode;
   }
 
   constructor(
     private _mediaControl: IMediaControlService,
-    @Optional() @Inject(CAN_RECORD_TOKEN) private _canRecord: boolean = false
+    @Optional() @Inject(CAN_RECORD_TOKEN) private _isInEditMode: boolean = false
   ) {}
 
   onPlayClick() {

@@ -13,6 +13,7 @@ export const diaryRoutes: Routes = [
       },
     ],
   },
+
   {
     path: 'edit',
     component: DiaryViewComponent,

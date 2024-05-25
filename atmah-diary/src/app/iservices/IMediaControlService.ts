@@ -11,6 +11,10 @@ export abstract class IMediaControlService {
     return this._replayServiceBase.paused;
   }
 
+  get isRecording(): boolean {
+    return this._recorderServiceBase.isRecording;
+  }
+
   constructor(
     private _replayServiceBase: IReplayService,
     private _recorderServiceBase: IRecorderService

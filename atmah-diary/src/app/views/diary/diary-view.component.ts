@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FullPageContainerComponent } from '../../components/full-page-container/full-page-container.component';
 import { DiaryComponent } from './diary/diary.component';
 import { ChapterTitleComponent } from '../../components/chapter-title/chapter-title.component';
 import { ActivatedRoute } from '@angular/router';
+import { RecordingIndicatorComponent } from '../../components/recording-indicator/recording-indicator.component';
 
 @Component({
   selector: 'view-diary',
@@ -13,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DiaryViewComponent implements OnInit {
   constructor(private routeData: ActivatedRoute) {}
+
   ngOnInit(): void {
     console.log('Viewing :: ', this.routeData.snapshot.routeConfig?.path);
   }

@@ -16,6 +16,7 @@ export class RecordButtonComponent {
   get buttonColor() {
     return this.recording ? this.recordingColor : this.nonRecordingColor;
   }
+
   onClick() {
     if (this.recording) {
       this.onStop.emit();

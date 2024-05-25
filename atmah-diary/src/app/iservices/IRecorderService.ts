@@ -9,7 +9,7 @@ export abstract class IRecorderService implements OnDestroy {
   private _destroyed: Subject<void> = new Subject();
   canRecord$ = this._canRecord.pipe(takeUntil(this._destroyed));
 
-  get canRecord() {
+  get isRecording() {
     return this._canRecord.value;
   }
 

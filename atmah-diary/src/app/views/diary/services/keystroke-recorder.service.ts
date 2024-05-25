@@ -21,7 +21,7 @@ export class KeystrokeRecorderService extends IRecorderService {
   }
 
   recordAction(event: KeyboardEvent) {
-    if (!this.canRecord) return;
+    if (!this.isRecording) return;
 
     const currentTime = Date.now();
     const keyStrokeDiff = Math.max(

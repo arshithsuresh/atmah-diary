@@ -1,0 +1,26 @@
+:host {
+  display: inline-flex;
+  gap: 6px;
+  font-family: 'Indie Flower', cursive;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  transition: all ease-in-out 350ms;
+
+  .recording-cricle {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    background-color: red;
+  }
+
+  &.recording {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  &.not-recording {
+    transform: translateY(56px);
+    opacity: 0;
+  }
+}
