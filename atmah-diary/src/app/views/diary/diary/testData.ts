@@ -1,6 +1,7 @@
-import { SingleLineData } from '../../../models/keystroke-data.model';
+import { DiaryPageData } from '../../../models/keystroke-data.model';
 
-export var testData: SingleLineData = {
+export var testData: DiaryPageData = {
+  pageIndex: 0,
   keyData: [
     {
       k: 'T',
@@ -1271,5 +1272,5 @@ export var testData: SingleLineData = {
       w: 2627,
     },
   ],
-  nextData: null,
+  component: null,
 };

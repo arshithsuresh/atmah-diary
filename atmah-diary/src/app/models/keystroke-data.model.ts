@@ -3,7 +3,12 @@ export interface Keystroke {
   w: number;
 }
 
-export interface SingleLineData {
+export interface DiaryPageData {
   keyData: Keystroke[];
-  nextData: any;
+  component: null;
+  pageIndex: number;
+}
+
+export interface DiaryData {
+  recordedData: Array<DiaryPageData>;
 }
