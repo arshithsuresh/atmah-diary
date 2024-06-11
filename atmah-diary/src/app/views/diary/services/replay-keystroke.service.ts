@@ -33,8 +33,6 @@ export class ReplayKeystrokeService extends IReplayService {
   startReplay() {
     if (!(this.control || this.pageData) || this.done) return;
 
-    console.log('Starting replaying keystrokes');
-
     setTimeout(() => {
       this.performTyping();
     }, this.waitTime);

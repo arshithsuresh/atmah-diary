@@ -6,7 +6,7 @@ import { Subject, takeUntil } from 'rxjs';
 export abstract class IReplayService implements OnDestroy {
   protected speedX: number = 2;
   protected _isPaused: Subject<boolean> = new Subject();
-  protected isPaused: boolean = false;
+  protected isPaused: boolean = true;
 
   private _destroyed = new Subject<void>();
   protected destroyed$ = this._destroyed.asObservable();

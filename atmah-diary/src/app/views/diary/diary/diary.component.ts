@@ -29,18 +29,13 @@ export class DiaryComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    this.performTyping();
+    this.keyReplay.setControl(this.diaryControl);
   }
 
   ngOnInit(): void {
     this.diaryControl.valueChanges
       .pipe(map((value: string) => value.at(-1)))
       .subscribe(key => {});
-  }
-
-  performTyping() {
-    this.keyReplay.setControl(this.diaryControl);
-    this.keyReplay.play();
   }
 
   onKeyDown(event: KeyboardEvent) {
