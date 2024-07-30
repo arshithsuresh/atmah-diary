@@ -4,9 +4,13 @@ export interface Keystroke {
 }
 
 export interface DiaryPageData {
+  pageEvents: RecordEvent[];
+  pageIndex: number;
+}
+
+export interface RecordEvent {
   keyData: Keystroke[];
   component: null;
-  pageIndex: number;
 }
 
 export interface DiaryData {

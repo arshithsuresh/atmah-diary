@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { AvailableKeyCodes } from '../enum/keyboard-key.enum';
-import { DiaryPageData } from '../models/keystroke-data.model';
+import { DiaryPageData, RecordEvent } from '../models/keystroke-data.model';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 @Injectable()
@@ -26,7 +26,7 @@ export abstract class IRecorderService implements OnDestroy {
     this._destroyed.complete();
   }
 
-  abstract pageData: DiaryPageData;
+  abstract pageData: RecordEvent;
   abstract recordAction(event: KeyboardEvent): void;
   abstract recordKey(
     keycode: AvailableKeyCodes,

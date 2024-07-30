@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DiaryPageData } from '../../../models/keystroke-data.model';
+import {
+  DiaryPageData,
+  RecordEvent,
+} from '../../../models/keystroke-data.model';
 import { testData } from '../diary/testData';
 import { FormControl } from '@angular/forms';
 import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
@@ -8,7 +11,7 @@ import { IReplayService } from '../../../iservices/IReplayService';
 
 @Injectable()
 export class ReplayKeystrokeService extends IReplayService {
-  private pageData: DiaryPageData = testData;
+  private pageData: RecordEvent = testData.pageEvents[0];
   private control!: FormControl;
 
   private _currentWaitIndex: number = 0;

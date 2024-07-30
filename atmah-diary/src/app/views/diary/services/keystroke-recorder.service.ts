@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
-import { DiaryPageData } from '../../../models/keystroke-data.model';
+import { RecordEvent } from '../../../models/keystroke-data.model';
 import { isCharacter } from '../../../utils/stringFunctions';
 import { IRecorderService } from '../../../iservices/IRecorderService';
 
@@ -9,7 +9,7 @@ import { IRecorderService } from '../../../iservices/IRecorderService';
 export class KeystrokeRecorderService extends IRecorderService {
   private _lastActionTime: number = -1;
 
-  pageData: DiaryPageData = { keyData: [], component: null, pageIndex: 0 };
+  pageData: RecordEvent = { keyData: [], component: null };
 
   constructor() {
     super();
