@@ -10,6 +10,7 @@ import { map } from 'rxjs';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
 import { IRecorderService } from '../../../iservices/IRecorderService';
+import { RecordableComponent } from '../../../base/RecordableComponent.base';
 
 @Component({
   selector: 'atmah-diary',
@@ -18,7 +19,10 @@ import { IRecorderService } from '../../../iservices/IRecorderService';
   styleUrl: './diary.component.scss',
   imports: [ReactiveFormsModule],
 })
-export class DiaryComponent implements OnInit, AfterViewInit {
+export class DiaryComponent
+  extends RecordableComponent
+  implements OnInit, AfterViewInit
+{
   @ViewChild('diaryTextarea') diaryTextarea!: ElementRef;
 
   diaryControl: FormControl = new FormControl('');
@@ -26,7 +30,9 @@ export class DiaryComponent implements OnInit, AfterViewInit {
   constructor(
     private keyStrokeRecorder: IRecorderService,
     private keyReplay: IReplayService
-  ) {}
+  ) {
+    super();
+  }
 
   ngAfterViewInit(): void {
     this.keyReplay.setControl(this.diaryControl);
