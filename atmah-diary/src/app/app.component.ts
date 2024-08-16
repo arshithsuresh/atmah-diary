@@ -1,6 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @Component({
   selector: 'app-root',

@@ -34,7 +34,8 @@ export class DiaryComponent
     super();
   }
 
-  ngAfterViewInit(): void {
+  override ngAfterViewInit(): void {
+    super.ngAfterViewInit();
     this.keyReplay.setControl(this.diaryControl);
   }
 
@@ -42,6 +43,10 @@ export class DiaryComponent
     this.diaryControl.valueChanges
       .pipe(map((value: string) => value.at(-1)))
       .subscribe(key => {});
+  }
+
+  override onFocus(): void {
+    this.componentSelected();
   }
 
   onKeyDown(event: KeyboardEvent) {

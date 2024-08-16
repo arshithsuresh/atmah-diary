@@ -1,9 +1,11 @@
 <atmah-full-page-container>
   <div class="title-container">
-    <atmah-chapter-title></atmah-chapter-title>
+    <atmah-recording-indicator></atmah-recording-indicator>
+    <atmah-media-control class="media-controls"></atmah-media-control>
+    <atmah-chapter-title recorder-id="title-component"></atmah-chapter-title>
   </div>
   <div class="diary-container">
-    <atmah-diary />
+    <atmah-diary recorder-id="diary-component" />
   </div>
   <div class="right-spacer"></div>
 </atmah-full-page-container>

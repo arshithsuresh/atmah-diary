@@ -4,11 +4,19 @@ import { DiaryComponent } from './diary/diary.component';
 import { ChapterTitleComponent } from '../../components/chapter-title/chapter-title.component';
 import { ActivatedRoute } from '@angular/router';
 import { RecordingIndicatorComponent } from '../../components/recording-indicator/recording-indicator.component';
+import { MediaButtonsModule } from '../../components/media-buttons/media-buttons.module';
 
 @Component({
   selector: 'view-diary',
   standalone: true,
-  imports: [FullPageContainerComponent, DiaryComponent, ChapterTitleComponent],
+  imports: [
+    FullPageContainerComponent,
+    DiaryComponent,
+    ChapterTitleComponent,
+    MediaButtonsModule,
+    RecordingIndicatorComponent,
+  ],
+
   templateUrl: './diary-view.component.html',
   styleUrl: './diary-view.component.scss',
 })

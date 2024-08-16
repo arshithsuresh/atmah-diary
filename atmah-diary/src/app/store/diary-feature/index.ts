@@ -1,7 +1,9 @@
 import { createFeature, createSelector } from '@ngrx/store';
 import { DiaryPageReducer } from './reducers';
 
-export const diaryPageFeature = createFeature({
+export { DiaryPageState } from './state';
+
+export const DiaryPageFeature = createFeature({
   name: 'diary',
   reducer: DiaryPageReducer,
   extraSelectors: ({ selectDiaryState, selectPageData }) => {
