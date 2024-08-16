@@ -3,6 +3,7 @@ import { DiaryPageState } from './state';
 import * as DiaryPageActions from './actions';
 import { NO_SELECTED_COMPONENT } from '../../constants/state.constant';
 import { state } from '@angular/animations';
+import * as DevErrors from '../../errors/dev-errors';
 
 export const initialState: DiaryPageState = {
   registeredComponents: new Map(),
@@ -24,6 +25,11 @@ export const DiaryPageReducer = createReducer(
     DiaryPageActions.RegisterRecordableComponent,
     (state: DiaryPageState, { componentId, component }) => {
       let _registeredComponents = new Map(state.registeredComponents);
+
+      if (_registeredComponents.has(componentId)) {
+        throw DevErrors.DUPLICATE_RECORDER_ID();
+      }
+
       _registeredComponents.set(componentId, true);
 
       return {

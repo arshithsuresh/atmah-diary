@@ -10,7 +10,7 @@ import { map } from 'rxjs';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
 import { IRecorderService } from '../../../iservices/IRecorderService';
-import { RecordableComponent } from '../../../base/RecordableComponent.base';
+import { KeypressRecordableComponent } from '../../../base/RecordableComponent.base';
 
 @Component({
   selector: 'atmah-diary',
@@ -20,7 +20,7 @@ import { RecordableComponent } from '../../../base/RecordableComponent.base';
   imports: [ReactiveFormsModule],
 })
 export class DiaryComponent
-  extends RecordableComponent
+  extends KeypressRecordableComponent
   implements OnInit, AfterViewInit
 {
   @ViewChild('diaryTextarea') diaryTextarea!: ElementRef;

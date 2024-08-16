@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { RecordEvent } from '../../models/keystroke-data.model';
-import { RecordableComponent } from '../../base/RecordableComponent.base';
+import { KeypressRecordableComponent } from '../../base/RecordableComponent.base';
 import { Type } from '@angular/core';
 
 export const RecordEventAction = createAction(

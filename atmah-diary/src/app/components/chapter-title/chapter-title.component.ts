@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { RecordableComponent } from '../../base/RecordableComponent.base';
+import { KeypressRecordableComponent } from '../../base/RecordableComponent.base';
 
 @Component({
   selector: 'atmah-chapter-title',
@@ -15,7 +15,7 @@ import { RecordableComponent } from '../../base/RecordableComponent.base';
   styleUrl: './chapter-title.component.scss',
 })
 export class ChapterTitleComponent
-  extends RecordableComponent
+  extends KeypressRecordableComponent
   implements AfterViewInit
 {
   override onFocus(): void {
