@@ -5,3 +5,6 @@ export const DUPLICATE_RECORDER_ID = () =>
 
 export const NO_RECORDER_COMPONENT = (recorderId: string) =>
   new DevelopmentError(`No Recorder element specified for ${recorderId}`);
+
+export const NO_RECORDER_FORM_CONTROL = (recorderId: string) =>
+  new DevelopmentError(`No form control specified for ${recorderId}`);

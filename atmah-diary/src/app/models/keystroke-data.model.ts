@@ -10,7 +10,7 @@ export interface DiaryPageData {
 
 export interface RecordEvent {
   keyData: Keystroke[];
-  component: null;
+  componentId: string;
 }
 
 export interface DiaryData {

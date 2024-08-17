@@ -27,7 +27,7 @@ export abstract class IReplayService implements OnDestroy {
 
   abstract startReplay(): void;
   abstract performTyping(): void;
-  abstract setControl(control: FormControl): void;
+  abstract setControl(control: FormControl, from?: string): void;
   abstract speedControl(newSpeed: number): number;
 
   constructor() {

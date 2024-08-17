@@ -2,9 +2,12 @@
   <div class="chapter-title">
     <div class="titleWrapper">
       <div class="title-date">12 January, 2023</div>
-      <textarea #recorderInput class="title" maxlength="40">
-        Diary title goes here. This might be two lines...</textarea
-      >
+      <textarea
+        #recorderInput
+        [formControl]="recordControl"
+        class="title"
+        maxlength="40">
+      </textarea>
     </div>
   </div>
 </div>

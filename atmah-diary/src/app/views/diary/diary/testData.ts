@@ -4,7 +4,7 @@ export var testData: DiaryPageData = {
   pageIndex: 0,
   pageEvents: [
     {
-      component: null,
+      componentId: 'diary-component',
       keyData: [
         {
           k: 'T',

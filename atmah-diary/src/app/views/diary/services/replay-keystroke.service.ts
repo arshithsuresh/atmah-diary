@@ -4,7 +4,7 @@ import {
   RecordEvent,
 } from '../../../models/keystroke-data.model';
 import { testData } from '../diary/testData';
-import { FormControl } from '@angular/forms';
+import { Form, FormControl } from '@angular/forms';
 import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
@@ -16,6 +16,8 @@ export class ReplayKeystrokeService extends IReplayService {
 
   private _currentWaitIndex: number = 0;
   private _currentCharacterIndex: number = 0;
+
+  private fromComponent?: string = '';
 
   get waitTime() {
     return this.pageData.keyData[this._currentWaitIndex].w / this.speedX;
@@ -29,8 +31,11 @@ export class ReplayKeystrokeService extends IReplayService {
     super();
   }
 
-  setControl(control: FormControl) {
+  setControl(control: FormControl, from?: string) {
     this.control = control;
+    this.fromComponent = from;
+
+    console.log('from', this.fromComponent);
   }
 
   startReplay() {
@@ -58,6 +63,7 @@ export class ReplayKeystrokeService extends IReplayService {
     this.control.setValue(newValue);
     this._currentCharacterIndex++;
     this._currentWaitIndex++;
+    console.log('from', this.fromComponent);
 
     if (this.done) return;
 

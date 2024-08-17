@@ -9,7 +9,7 @@ import { IRecorderService } from '../../../iservices/IRecorderService';
 export class KeystrokeRecorderService extends IRecorderService {
   private _lastActionTime: number = -1;
 
-  pageData: RecordEvent = { keyData: [], component: null };
+  pageData: RecordEvent = { keyData: [], componentId: 'null' };
 
   constructor() {
     super();
