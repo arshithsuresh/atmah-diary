@@ -71,7 +71,7 @@ export const DiaryPageReducer = createReducer(
   }),
 
   on(DiaryPageActions.DiaryReplayCompleted, (state: DiaryPageState) => {
-    console.log('Start Resume');
+    console.log('Diary Replay Completed');
 
     return {
       ...state,

@@ -52,7 +52,8 @@ export class ReplayKeystrokeService extends IReplayService {
   }
 
   resetReplay(): void {
-    this.control = new FormControl();
+    this.recordEvent = DEFAULT_RECORD_EVENT;
+    this.control = DEFAULT_FORM_CONTROL;
     this.speedX = 2;
     this._isPaused.next(true);
   }

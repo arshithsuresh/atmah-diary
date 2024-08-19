@@ -15,6 +15,7 @@ export class MediaControlService extends IMediaControlService {
 
   play(): void {
     if (!this._replayService.hasRecordEvent) {
+      console.log('Starting from beginning');
       this.store
         .select(DiaryPageFeature.selectRecordEvent)
         .pipe(take(1))

@@ -101,6 +101,7 @@ export abstract class KeypressRecordableComponent
         if (this.isSelectedComponent && !this.inRecordingPage) {
           console.log('Selected Component', this.recorderId);
           this.keyReplay.setControl(this.recordControl, this.recorderId);
+          this.recordControl.setValue('');
         }
 
         this.$componentSelected.emit();
