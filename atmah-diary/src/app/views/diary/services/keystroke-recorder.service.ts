@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
-import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
+import { KeyCodeMapping } from '../../../constants/keyboard-map.constants';
 import { RecordEvent } from '../../../models/keystroke-data.model';
 import { isCharacter } from '../../../utils/stringFunctions';
 import { IRecorderService } from '../../../iservices/IRecorderService';

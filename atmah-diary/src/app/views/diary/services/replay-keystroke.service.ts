@@ -5,26 +5,29 @@ import {
 } from '../../../models/keystroke-data.model';
 import { testData } from '../diary/testData';
 import { Form, FormControl } from '@angular/forms';
-import { KeyCodeMapping } from '../../../constants/keyboard-map.constatns';
+import { KeyCodeMapping } from '../../../constants/keyboard-map.constants';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
+import { Subject } from 'rxjs';
+import {
+  DEFAULT_FORM_CONTROL,
+  DEFAULT_RECORD_EVENT,
+} from '../../../constants/default-values.constants';
 
 @Injectable()
 export class ReplayKeystrokeService extends IReplayService {
-  private pageData: RecordEvent = testData.pageEvents[0];
-  private control!: FormControl;
-
   private _currentWaitIndex: number = 0;
   private _currentCharacterIndex: number = 0;
 
-  private fromComponent?: string = '';
-
   get waitTime() {
-    return this.pageData.keyData[this._currentWaitIndex].w / this.speedX;
+    return this.recordEvent.keyData[this._currentWaitIndex].w / this.speedX;
   }
 
   get done() {
-    return this._currentCharacterIndex >= this.pageData.keyData.length;
+    return (
+      this.hasRecordEvent &&
+      this._currentCharacterIndex >= this.recordEvent.keyData.length
+    );
   }
 
   constructor() {
@@ -33,17 +36,25 @@ export class ReplayKeystrokeService extends IReplayService {
 
   setControl(control: FormControl, from?: string) {
     this.control = control;
-    this.fromComponent = from;
-
-    console.log('from', this.fromComponent);
   }
 
   startReplay() {
-    if (!(this.control || this.pageData) || this.done) return;
+    if (!(this.hasFormControl && this.hasRecordEvent) || this.done) {
+      console.warn(
+        `Couldn't start replaying: has control :${this.hasFormControl}, has record event : ${this.hasRecordEvent}, finished : ${this.done}`
+      );
+      return;
+    }
 
     setTimeout(() => {
       this.performTyping();
     }, this.waitTime);
+  }
+
+  resetReplay(): void {
+    this.control = new FormControl();
+    this.speedX = 2;
+    this._isPaused.next(true);
   }
 
   getKeyStrokeData() {}
@@ -51,7 +62,8 @@ export class ReplayKeystrokeService extends IReplayService {
   performTyping() {
     if (this.paused) return;
 
-    const nextCharacter = this.pageData.keyData[this._currentCharacterIndex].k;
+    const nextCharacter =
+      this.recordEvent.keyData[this._currentCharacterIndex].k;
     let newValue = this.control.value as string;
 
     if (nextCharacter == KeyCodeMapping.get(AvailableKeyCodes.Backspace)) {
@@ -63,9 +75,13 @@ export class ReplayKeystrokeService extends IReplayService {
     this.control.setValue(newValue);
     this._currentCharacterIndex++;
     this._currentWaitIndex++;
-    console.log('from', this.fromComponent);
 
-    if (this.done) return;
+    if (this.done) {
+      this._currentCharacterIndex = 0;
+      this._currentWaitIndex = 0;
+      this.recordEventCompleted();
+      return;
+    }
 
     setTimeout(() => {
       this.performTyping();

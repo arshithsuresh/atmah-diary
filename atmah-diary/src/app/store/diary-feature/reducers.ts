@@ -4,14 +4,13 @@ import * as DiaryPageActions from './actions';
 import { NO_SELECTED_COMPONENT } from '../../constants/state.constant';
 import { state } from '@angular/animations';
 import * as DevErrors from '../../errors/dev-errors';
+import { testData } from '../../views/diary/diary/testData';
 
 export const initialState: DiaryPageState = {
   registeredComponents: new Map(),
   currentComponent: NO_SELECTED_COMPONENT,
-  pageData: {
-    pageEvents: [],
-    pageIndex: -1,
-  },
+  pageData: testData,
+  currentRecordEventIndex: 0,
   loading: false,
 };
 
@@ -49,5 +48,35 @@ export const DiaryPageReducer = createReducer(
       }
       return { ...state, currentComponent: componentId };
     }
-  )
+  ),
+
+  on(DiaryPageActions.RecordEventCompleted, (state: DiaryPageState) => {
+    const nextRecordEventIndex = state.currentRecordEventIndex + 1;
+    console.log('Next Record Event Index ', nextRecordEventIndex);
+    return {
+      ...state,
+      currentRecordEventIndex: nextRecordEventIndex,
+    };
+  }),
+
+  on(DiaryPageActions.SetNextRecordEvent, (state: DiaryPageState, { data }) => {
+    return { ...state, currentComponent: data.componentId };
+  }),
+
+  on(DiaryPageActions.StartDiaryReplay, (state: DiaryPageState) => {
+    console.log('Start Diary Replay');
+    const currentRecordEvent =
+      state.pageData.pageEvents[state.currentRecordEventIndex];
+    return { ...state, currentComponent: currentRecordEvent.componentId };
+  }),
+
+  on(DiaryPageActions.DiaryReplayCompleted, (state: DiaryPageState) => {
+    console.log('Start Resume');
+
+    return {
+      ...state,
+      currentRecordEventIndex: 0,
+      currentComponent: NO_SELECTED_COMPONENT,
+    };
+  })
 );

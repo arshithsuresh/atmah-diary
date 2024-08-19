@@ -6,5 +6,6 @@ export interface DiaryPageState {
   registeredComponents: Map<string, boolean>;
   currentComponent: string;
   pageData: DiaryPageData;
+  currentRecordEventIndex: number;
   loading: boolean;
 }

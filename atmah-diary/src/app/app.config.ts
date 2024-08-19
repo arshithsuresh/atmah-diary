@@ -11,7 +11,6 @@ import { DiaryPageFeature } from './store/diary-feature';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideStore(),
-    provideEffects(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
 
     provideRouter(routes),

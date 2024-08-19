@@ -1,21 +1,36 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IMediaControlService } from '../../../iservices/IMediaControlService';
-import { IReplayService } from '../../../iservices/IReplayService';
-import { IRecorderService } from '../../../iservices/IRecorderService';
+import { Store } from '@ngrx/store';
+import { DiaryPageFeature, DiaryPageState } from '../../../store/diary-feature';
+import { take } from 'rxjs';
+import { DEFAULT_RECORD_EVENT } from '../../../constants/default-values.constants';
+import { StartDiaryReplay } from '../../../store/diary-feature/actions';
 
 @Injectable()
 export class MediaControlService extends IMediaControlService {
-  constructor(
-    private _replayService: IReplayService,
-    private _recorderService: IRecorderService
-  ) {
-    super(_replayService, _recorderService);
+  private store = inject(Store<DiaryPageState>);
+  constructor() {
+    super();
   }
 
-  override play(): void {
-    this._replayService.play();
+  play(): void {
+    if (!this._replayService.hasRecordEvent) {
+      this.store
+        .select(DiaryPageFeature.selectRecordEvent)
+        .pipe(take(1))
+        .subscribe(recordData => {
+          this._replayService.setRecordEvent(
+            recordData ?? DEFAULT_RECORD_EVENT,
+            false
+          );
+        });
+
+      this.store.dispatch(StartDiaryReplay());
+    } else {
+      this._replayService.play();
+    }
   }
-  override pause(): void {
+  pause(): void {
     this._replayService.pauseReplay();
   }
 }

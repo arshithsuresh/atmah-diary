@@ -6,6 +6,7 @@ export const diaryRoutes: Routes = [
   {
     path: 'view',
     component: DiaryViewComponent,
+
     providers: [
       {
         provide: CAN_RECORD_TOKEN,

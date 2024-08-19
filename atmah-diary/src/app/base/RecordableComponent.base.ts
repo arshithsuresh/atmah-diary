@@ -23,6 +23,7 @@ import { IRecorderService } from '../iservices/IRecorderService';
 import { IReplayService } from '../iservices/IReplayService';
 import { AvailableKeyCodes } from '../enum/keyboard-key.enum';
 import { FormControl } from '@angular/forms';
+import { CAN_RECORD_TOKEN } from '../tokens/can-record.token';
 
 @Component({
   template: '',
@@ -32,32 +33,38 @@ export abstract class KeypressRecordableComponent
 {
   @HostListener('click', ['$event'])
   _onFocus(event: MouseEvent) {
-    if (this.isControlDisabled) {
+    if (this.isControlDisabled || !this.isReadyToRecord()) {
       event.preventDefault();
       return;
     }
 
-    console.log(`Click from ${this.recorderId}`);
     this.onFocus();
   }
 
   @ViewChild('recorderInput') recorderElement!: ElementRef<HTMLInputElement>;
-
   @Input({ alias: 'recorder-id', required: true }) recorderId!: string;
 
   @Output('selected')
   $componentSelected: EventEmitter<void> = new EventEmitter();
 
-  private diaryStore = inject(Store<DiaryPageState>);
-  private $destroyed: Subject<void> = new Subject();
-
-  private currentSelectedComponent = this.diaryStore
-    .select(DiaryPageFeature.selectCurrentComponent)
-    .pipe(takeUntil(this.$destroyed));
-
+  protected store = inject(Store<DiaryPageState>);
+  protected $destroyed: Subject<void> = new Subject();
   protected isSelectedComponent: boolean = false;
   protected keyStrokeRecorder: IRecorderService = inject(IRecorderService);
   protected keyReplay: IReplayService = inject(IReplayService);
+  protected inRecordingPage: boolean = inject(CAN_RECORD_TOKEN);
+
+  private currentSelectedComponent = this.store
+    .select(DiaryPageFeature.selectCurrentComponent)
+    .pipe(takeUntil(this.$destroyed));
+
+  private _pageDataSelector = this.store
+    .select(DiaryPageFeature.selectPageData)
+    .pipe(takeUntil(this.$destroyed));
+
+  get pageDataSelector() {
+    return this._pageDataSelector;
+  }
 
   recordControl: FormControl = new FormControl('');
 
@@ -91,8 +98,10 @@ export abstract class KeypressRecordableComponent
       .subscribe(isSelected => {
         this.isSelectedComponent = isSelected;
 
-        if (this.isSelectedComponent)
+        if (this.isSelectedComponent && !this.inRecordingPage) {
+          console.log('Selected Component', this.recorderId);
           this.keyReplay.setControl(this.recordControl, this.recorderId);
+        }
 
         this.$componentSelected.emit();
       });
@@ -105,7 +114,7 @@ export abstract class KeypressRecordableComponent
   }
 
   registerRecordableComponent() {
-    this.diaryStore.dispatch(
+    this.store.dispatch(
       DiaryPageActions.RegisterRecordableComponent({
         componentId: this.recorderId,
         component: true,
@@ -116,7 +125,7 @@ export abstract class KeypressRecordableComponent
   componentSelected() {
     if (this.isSelectedComponent) return;
 
-    this.diaryStore.dispatch(
+    this.store.dispatch(
       DiaryPageActions.FocusRecordableComponent({
         componentId: this.recorderId,
       })
@@ -137,7 +146,7 @@ export abstract class KeypressRecordableComponent
   }
 
   onMouseDown(event: MouseEvent) {
-    if (this.isControlDisabled) {
+    if (this.isControlDisabled || !this.isReadyToRecord()) {
       event.preventDefault();
       return;
     }
@@ -147,7 +156,7 @@ export abstract class KeypressRecordableComponent
   }
 
   canRecordKeys(event: KeyboardEvent) {
-    const canRecord = this.keyStrokeRecorder.checkKeyValid(
+    const isValidKey = this.keyStrokeRecorder.checkKeyValid(
       event.code as AvailableKeyCodes,
       event.ctrlKey
     );
@@ -156,12 +165,28 @@ export abstract class KeypressRecordableComponent
     );
 
     return (
-      this.isSelectedComponent && atEnd && canRecord && !this.isControlDisabled
+      this.isReadyToRecord() &&
+      this.isSelectedComponent &&
+      atEnd &&
+      isValidKey &&
+      !this.isControlDisabled
     );
+  }
+
+  isReadyToRecord() {
+    return this.inRecordingPage && this.keyStrokeRecorder.isRecording;
   }
 
   checkIfAtEnd(cursorPos: number) {
     return cursorPos == this.recordControl.value.length;
+  }
+
+  focusControl() {
+    this.recorderElement.nativeElement.focus();
+  }
+
+  resetControls() {
+    if (this.recordControl) this.recordControl.reset();
   }
 
   onDragEnter($event: Event) {
@@ -171,11 +196,7 @@ export abstract class KeypressRecordableComponent
     ).value.length;
   }
 
-  ngOnInit(): void {
-    this.recordControl.valueChanges
-      .pipe(map((value: string) => value.at(-1)))
-      .subscribe(key => {});
-  }
+  ngOnInit(): void {}
 
   abstract onFocus(): void;
 }

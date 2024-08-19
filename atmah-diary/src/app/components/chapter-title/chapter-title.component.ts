@@ -8,6 +8,8 @@ import {
 
 import { KeypressRecordableComponent } from '../../base/RecordableComponent.base';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DiaryPageFeature } from '../../store/diary-feature';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'atmah-chapter-title',
@@ -20,10 +22,6 @@ export class ChapterTitleComponent
   extends KeypressRecordableComponent
   implements AfterViewInit
 {
-  override onFocus(): void {
-    this.componentSelected();
-  }
-
   @ViewChild('titleArea') titleTextArea!: ElementRef;
 
   constructor(private renderer: Renderer2) {
@@ -32,7 +30,9 @@ export class ChapterTitleComponent
 
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
+  }
 
-    this.recordControl.setValue('Diary title goes here');
+  override onFocus(): void {
+    this.componentSelected();
   }
 }

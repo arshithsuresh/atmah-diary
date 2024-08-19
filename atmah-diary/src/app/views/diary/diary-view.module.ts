@@ -9,6 +9,10 @@ import { KeystrokeRecorderService } from './services/keystroke-recorder.service'
 import { DiaryViewTitleResolver } from './resolver/title.title-strategy';
 import { provideState, Store, StoreModule } from '@ngrx/store';
 import { DiaryPageFeature } from '../../store/diary-feature';
+import { IDiaryDataService } from '../../iservices/IDiaryDataService';
+import { DiaryDataService } from './services/diary-data.service';
+import { provideEffects } from '@ngrx/effects';
+import * as DiaryEffects from '../../store/diary-feature/effects';
 
 @NgModule({
   declarations: [],
@@ -18,7 +22,9 @@ import { DiaryPageFeature } from '../../store/diary-feature';
     { provide: IReplayService, useClass: ReplayKeystrokeService },
     { provide: IRecorderService, useClass: KeystrokeRecorderService },
     { provide: TitleStrategy, useClass: DiaryViewTitleResolver },
+    { provide: IDiaryDataService, useClass: DiaryDataService },
     provideState(DiaryPageFeature),
+    provideEffects(DiaryEffects),
   ],
 })
 export class DiaryViewModule {}

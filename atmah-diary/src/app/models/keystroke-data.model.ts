@@ -4,6 +4,8 @@ export interface Keystroke {
 }
 
 export interface DiaryPageData {
+  initialPageTitle: string;
+  dated: number;
   pageEvents: RecordEvent[];
   pageIndex: number;
 }
