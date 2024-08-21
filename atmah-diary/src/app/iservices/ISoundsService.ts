@@ -5,6 +5,10 @@ export abstract class ISoundsService<T> {
 
   private loadedSounds: Map<T, Array<HTMLAudioElement>> = new Map();
 
+  initService() {
+    this.loadAllSounds();
+  }
+
   loadAllSounds() {
     this.keyboardSoundMap.forEach((sounds, key) => {
       sounds.forEach(soundSrc => {

@@ -21,6 +21,7 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
   }
 
   initialize(): void {
+    this.replayService.initService();
     this.replayService.$recordEventCompleted
       .pipe(takeUntil(this.dispose$))
       .subscribe(() => {

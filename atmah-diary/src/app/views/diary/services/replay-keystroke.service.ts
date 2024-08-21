@@ -36,9 +36,10 @@ export class ReplayKeystrokeService extends IReplayService {
 
   constructor() {
     super();
-    this._soundService.loadAllSounds();
   }
-
+  initService() {
+    this._soundService.initService();
+  }
   setControl(control: FormControl, from?: string) {
     this.control = control;
   }
@@ -64,15 +65,30 @@ export class ReplayKeystrokeService extends IReplayService {
 
   getKeyStrokeData() {}
 
+  playKeystrokeSound(character: string) {
+    if (this.speed >= 4 || this.waitTime <= 50) return;
+
+    switch (character) {
+      case KeyCodeMapping.get(AvailableKeyCodes.Backspace):
+        this._soundService.playSound(KeyboardSounds.BACKSPACE_KEY);
+        break;
+      case KeyCodeMapping.get(AvailableKeyCodes.Enter):
+        this._soundService.playSound(KeyboardSounds.ENTER_KEY);
+        break;
+
+      default:
+        this._soundService.playSound(KeyboardSounds.NORMAL_KEY);
+        break;
+    }
+  }
   performTyping() {
     if (this.paused) return;
-
-    if (this.speed < 4 && this.waitTime > 50)
-      this._soundService.playSound(KeyboardSounds.NORMAL_KEY);
 
     const nextCharacter =
       this.recordEvent.keyData[this._currentCharacterIndex].k;
     let newValue = this.control.value as string;
+
+    this.playKeystrokeSound(nextCharacter);
 
     if (nextCharacter == KeyCodeMapping.get(AvailableKeyCodes.Backspace)) {
       newValue = newValue.slice(0, newValue.length - 1);

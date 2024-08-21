@@ -46,6 +46,7 @@ export abstract class IReplayService implements OnDestroy {
     return this.control != DEFAULT_FORM_CONTROL;
   }
 
+  abstract initService(): void;
   abstract startReplay(): void;
   abstract performTyping(): void;
   abstract setControl(control: FormControl, from?: string): void;
