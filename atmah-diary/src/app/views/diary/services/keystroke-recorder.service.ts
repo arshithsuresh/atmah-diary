@@ -35,11 +35,6 @@ export class KeystrokeRecorderService extends IRecorderService {
       event.shiftKey
     );
 
-    this.pageData.keyData.push({
-      k: keyCharacter,
-      w: waitTime,
-    });
-
     this._lastActionTime = Date.now();
   }
 

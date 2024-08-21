@@ -9,7 +9,7 @@ import {
 
 @Injectable()
 export abstract class IReplayService implements OnDestroy {
-  protected speedX: number = 2;
+  protected speedX: number = 1;
   protected _isPaused: Subject<boolean> = new Subject();
   protected isPaused: boolean = true;
   protected recordEvent: RecordEvent = DEFAULT_RECORD_EVENT;
