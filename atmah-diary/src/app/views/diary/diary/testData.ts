@@ -341,7 +341,7 @@ export var testData: DiaryPageData = {
           w: 170,
         },
         {
-          k: '/',
+          k: '/n',
           w: 661,
         },
         {
@@ -388,6 +388,7 @@ export var testData: DiaryPageData = {
           k: '.',
           w: 671,
         },
+        { k: '\u000D', w: 100 },
       ],
     },
     {
@@ -1451,7 +1452,7 @@ export var testData: DiaryPageData = {
           w: 253,
         },
         {
-          k: '\r',
+          k: '\u000D',
           w: 2002,
         },
       ],
@@ -1459,6 +1460,7 @@ export var testData: DiaryPageData = {
     {
       componentId: 'title-component',
       keyData: [
+        { k: '\u000D', w: 100 },
         {
           k: ' ',
           w: 1918,

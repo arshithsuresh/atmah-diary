@@ -13,6 +13,7 @@ import { IDiaryDataService } from '../../iservices/IDiaryDataService';
 import { DiaryDataService } from './services/diary-data.service';
 import { provideEffects } from '@ngrx/effects';
 import * as DiaryEffects from '../../store/diary-feature/effects';
+import { KeyboardSoundsService } from './services/keyboard-sounds.service';
 
 @NgModule({
   declarations: [],
@@ -23,6 +24,7 @@ import * as DiaryEffects from '../../store/diary-feature/effects';
     { provide: IRecorderService, useClass: KeystrokeRecorderService },
     { provide: TitleStrategy, useClass: DiaryViewTitleResolver },
     { provide: IDiaryDataService, useClass: DiaryDataService },
+    KeyboardSoundsService,
     provideState(DiaryPageFeature),
     provideEffects(DiaryEffects),
   ],

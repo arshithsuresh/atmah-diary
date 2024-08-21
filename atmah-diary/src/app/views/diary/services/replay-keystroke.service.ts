@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   DiaryPageData,
   RecordEvent,
@@ -13,11 +13,15 @@ import {
   DEFAULT_FORM_CONTROL,
   DEFAULT_RECORD_EVENT,
 } from '../../../constants/default-values.constants';
+import { KeyboardSoundsService } from './keyboard-sounds.service';
+import { KeyboardSounds } from '../../../enum/key-sound.enum';
 
 @Injectable()
 export class ReplayKeystrokeService extends IReplayService {
   private _currentWaitIndex: number = 0;
   private _currentCharacterIndex: number = 0;
+
+  private _soundService = inject(KeyboardSoundsService);
 
   get waitTime() {
     return this.recordEvent.keyData[this._currentWaitIndex].w / this.speedX;
@@ -30,26 +34,9 @@ export class ReplayKeystrokeService extends IReplayService {
     );
   }
 
-  audio = new Audio('assets/sounds/keyboard/key5.mp3');
-
-  keylist = [
-    new Audio('assets/sounds/keyboard/key1.mp3'),
-    new Audio('assets/sounds/keyboard/key2.mp3'),
-    new Audio('assets/sounds/keyboard/key3.mp3'),
-    new Audio('assets/sounds/keyboard/key4.mp3'),
-    new Audio('assets/sounds/keyboard/key5.mp3'),
-    new Audio('assets/sounds/keyboard/key6.mp3'),
-    new Audio('assets/sounds/keyboard/key7.mp3'),
-    new Audio('assets/sounds/keyboard/key8.mp3'),
-    new Audio('assets/sounds/keyboard/key9.mp3'),
-    new Audio('assets/sounds/keyboard/key10.mp3'),
-    new Audio('assets/sounds/keyboard/key11.mp3'),
-    new Audio('assets/sounds/keyboard/key12.mp3'),
-  ];
-
   constructor() {
     super();
-    this.keylist.forEach(audio => audio.load());
+    this._soundService.loadAllSounds();
   }
 
   setControl(control: FormControl, from?: string) {
@@ -80,7 +67,8 @@ export class ReplayKeystrokeService extends IReplayService {
   performTyping() {
     if (this.paused) return;
 
-    if (this.speed < 4 && this.waitTime > 50) this.playAudio();
+    if (this.speed < 4 && this.waitTime > 50)
+      this._soundService.playSound(KeyboardSounds.NORMAL_KEY);
 
     const nextCharacter =
       this.recordEvent.keyData[this._currentCharacterIndex].k;
@@ -110,14 +98,5 @@ export class ReplayKeystrokeService extends IReplayService {
 
   speedControl(newSpeed: number): number {
     return Math.min(Math.max(newSpeed, 1 / 4), 8);
-  }
-  randomIntFromInterval(min: number, max: number) {
-    // min and max included
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-  playAudio() {
-    const keyAudio = this.keylist.at(this.randomIntFromInterval(0, 11));
-    keyAudio!.volume = Math.min(0.25, Math.random());
-    keyAudio?.play();
   }
 }
