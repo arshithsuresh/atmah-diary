@@ -14,7 +14,7 @@ import {
 import { Store } from '@ngrx/store';
 import { DiaryPageState, DiaryPageFeature } from '../store/diary-feature';
 import { map, Subject, takeUntil } from 'rxjs';
-import * as DiaryPageActions from '../store/diary-feature/actions';
+import { DiaryPageActions } from '../store/diary-feature/actions';
 import {
   NO_RECORDER_COMPONENT,
   NO_RECORDER_FORM_CONTROL,
@@ -115,7 +115,7 @@ export abstract class KeypressRecordableComponent
 
   registerRecordableComponent() {
     this.store.dispatch(
-      DiaryPageActions.RegisterRecordableComponent({
+      DiaryPageActions.registerRecordableComponent({
         componentId: this.recorderId,
         component: true,
       })
@@ -126,7 +126,7 @@ export abstract class KeypressRecordableComponent
     if (this.isSelectedComponent) return;
 
     this.store.dispatch(
-      DiaryPageActions.FocusRecordableComponent({
+      DiaryPageActions.focusRecordableComponent({
         componentId: this.recorderId,
       })
     );

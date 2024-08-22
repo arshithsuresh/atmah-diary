@@ -3,7 +3,7 @@ import { IDiaryDataService } from '../../../iservices/IDiaryDataService';
 import { DiaryPageFeature, DiaryPageState } from '../../../store/diary-feature';
 import { select, Store } from '@ngrx/store';
 import { defaultIfEmpty, take, takeUntil } from 'rxjs';
-import * as DiaryActions from '../../../store/diary-feature/actions';
+import { DiaryPageActions } from '../../../store/diary-feature/actions';
 import { RecordEvent } from '../../../models/keystroke-data.model';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
     this.replayService.$recordEventCompleted
       .pipe(takeUntil(this.dispose$))
       .subscribe(() => {
-        this.diaryStore.dispatch(DiaryActions.RecordEventCompleted());
+        this.diaryStore.dispatch(DiaryPageActions.recordEventCompleted());
       });
   }
 

@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as DiaryActions from './actions';
+import { DiaryPageActions } from './actions';
 import { exhaustMap, map, tap } from 'rxjs';
 import { IDiaryDataService } from '../../iservices/IDiaryDataService';
 import { IMediaControlService } from '../../iservices/IMediaControlService';
@@ -10,13 +10,13 @@ import { DEFAULT_RECORD_EVENT } from '../../constants/default-values.constants';
 export const recordEventCompleted = createEffect(
   (action$ = inject(Actions), diaryDataService = inject(IDiaryDataService)) => {
     return action$.pipe(
-      ofType(DiaryActions.RecordEventCompleted),
+      ofType(DiaryPageActions.recordEventCompleted),
       exhaustMap(() =>
         diaryDataService.getNextRecordEvent().pipe(
           map(data => {
             if (data != DEFAULT_RECORD_EVENT)
-              return DiaryActions.SetNextRecordEvent({ data: data! });
-            else return DiaryActions.DiaryReplayCompleted();
+              return DiaryPageActions.setNextRecordEvent({ data: data! });
+            else return DiaryPageActions.diaryReplayCompleted();
           })
         )
       )
@@ -28,7 +28,7 @@ export const recordEventCompleted = createEffect(
 export const setNextRecordEvent = createEffect(
   (action$ = inject(Actions), replayService = inject(IReplayService)) => {
     return action$.pipe(
-      ofType(DiaryActions.SetNextRecordEvent),
+      ofType(DiaryPageActions.setNextRecordEvent),
       tap(data => {
         replayService.setRecordEvent(data.data);
         replayService.play();
@@ -45,7 +45,7 @@ export const diaryReplayCompleted = createEffect(
     replayService = inject(IReplayService)
   ) => {
     return action$.pipe(
-      ofType(DiaryActions.DiaryReplayCompleted),
+      ofType(DiaryPageActions.diaryReplayCompleted),
       tap(() => {
         mediaControlService.pause();
         replayService.resetReplay();
@@ -58,8 +58,8 @@ export const diaryReplayCompleted = createEffect(
 export const startDiaryReplay = createEffect(
   (action$ = inject(Actions)) => {
     return action$.pipe(
-      ofType(DiaryActions.StartDiaryReplay),
-      map(() => DiaryActions.ResumeDiaryReplay())
+      ofType(DiaryPageActions.startDiaryReplay),
+      map(() => DiaryPageActions.resumeDiaryReplay())
     );
   },
   { functional: true, dispatch: true }
@@ -68,7 +68,7 @@ export const startDiaryReplay = createEffect(
 export const resumeDiaryReplay = createEffect(
   (action$ = inject(Actions), replayService = inject(IReplayService)) => {
     return action$.pipe(
-      ofType(DiaryActions.ResumeDiaryReplay),
+      ofType(DiaryPageActions.resumeDiaryReplay),
       tap(() => {
         replayService.play();
       })

@@ -1,8 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { DiaryPageState } from './state';
-import * as DiaryPageActions from './actions';
+import { DiaryPageActions } from './actions';
 import { NO_SELECTED_COMPONENT } from '../../constants/state.constant';
-import { state } from '@angular/animations';
 import * as DevErrors from '../../errors/dev-errors';
 import { testData } from '../../views/diary/diary/testData';
 
@@ -16,12 +15,12 @@ export const initialState: DiaryPageState = {
 
 export const DiaryPageReducer = createReducer(
   initialState,
-  on(DiaryPageActions.RecordEventAction, (state, { data }) => {
+  on(DiaryPageActions.recordEventAction, (state, { data }) => {
     return state;
   }),
 
   on(
-    DiaryPageActions.RegisterRecordableComponent,
+    DiaryPageActions.registerRecordableComponent,
     (state: DiaryPageState, { componentId, component }) => {
       let _registeredComponents = new Map(state.registeredComponents);
 
@@ -39,7 +38,7 @@ export const DiaryPageReducer = createReducer(
   ),
 
   on(
-    DiaryPageActions.FocusRecordableComponent,
+    DiaryPageActions.focusRecordableComponent,
     (state: DiaryPageState, { componentId }) => {
       const currentComponent = state.registeredComponents.get(componentId);
       if (!state.registeredComponents.get(componentId)) {
@@ -50,7 +49,7 @@ export const DiaryPageReducer = createReducer(
     }
   ),
 
-  on(DiaryPageActions.RecordEventCompleted, (state: DiaryPageState) => {
+  on(DiaryPageActions.recordEventCompleted, (state: DiaryPageState) => {
     const nextRecordEventIndex = state.currentRecordEventIndex + 1;
     console.log('Next Record Event Index ', nextRecordEventIndex);
     return {
@@ -59,18 +58,18 @@ export const DiaryPageReducer = createReducer(
     };
   }),
 
-  on(DiaryPageActions.SetNextRecordEvent, (state: DiaryPageState, { data }) => {
+  on(DiaryPageActions.setNextRecordEvent, (state: DiaryPageState, { data }) => {
     return { ...state, currentComponent: data.componentId };
   }),
 
-  on(DiaryPageActions.StartDiaryReplay, (state: DiaryPageState) => {
+  on(DiaryPageActions.startDiaryReplay, (state: DiaryPageState) => {
     console.log('Start Diary Replay');
     const currentRecordEvent =
       state.pageData.pageEvents[state.currentRecordEventIndex];
     return { ...state, currentComponent: currentRecordEvent.componentId };
   }),
 
-  on(DiaryPageActions.DiaryReplayCompleted, (state: DiaryPageState) => {
+  on(DiaryPageActions.diaryReplayCompleted, (state: DiaryPageState) => {
     console.log('Diary Replay Completed');
 
     return {

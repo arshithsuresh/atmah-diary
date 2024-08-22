@@ -1,45 +1,33 @@
-import { createAction, props } from '@ngrx/store';
+import {
+  createAction,
+  createActionGroup,
+  emptyProps,
+  props,
+} from '@ngrx/store';
 import { RecordEvent } from '../../models/keystroke-data.model';
 
-export const RecordEventAction = createAction(
-  '[Diary Actions] Record Event',
-  props<{ data: RecordEvent }>()
-);
+export const DiaryPageActions = createActionGroup({
+  source: 'Diary Actions',
+  events: {
+    RegisterRecordableComponent: props<{
+      componentId: string;
+      component: boolean;
+    }>(),
 
-export const RegisterRecordableComponent = createAction(
-  '[Diary Actions] Register Recordable Component',
-  props<{
-    componentId: string;
-    component: boolean;
-  }>()
-);
+    RecordEventAction: props<{ data: RecordEvent }>(),
 
-export const FocusRecordableComponent = createAction(
-  '[Diary Actions] Focus Recordable Component',
-  props<{ componentId: string }>()
-);
+    FocusRecordableComponent: props<{ componentId: string }>(),
 
-export const RecordEventCompleted = createAction(
-  '[Diary Actions] Record Event Completed'
-);
+    RecordEventCompleted: emptyProps(),
 
-export const SetNextRecordEvent = createAction(
-  '[Diary Actions] Set Next Record Event',
-  props<{ data: RecordEvent }>()
-);
+    SetNextRecordEvent: props<{ data: RecordEvent }>(),
 
-export const StartDiaryReplay = createAction(
-  '[Diary Actions] Start Diary Replay'
-);
+    StartDiaryReplay: emptyProps(),
 
-export const ResumeDiaryReplay = createAction(
-  '[Diary Actions] Resume Diary Replay'
-);
+    ResumeDiaryReplay: emptyProps(),
 
-export const PauseDiaryReplay = createAction(
-  '[Diary Actions] Pause Diary Replay'
-);
+    PauseDiaryReplay: emptyProps(),
 
-export const DiaryReplayCompleted = createAction(
-  '[Diary Actions] Diary Replay Completed'
-);
+    DiaryReplayCompleted: emptyProps(),
+  },
+});

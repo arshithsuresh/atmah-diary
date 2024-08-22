@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { DiaryPageFeature, DiaryPageState } from '../../../store/diary-feature';
 import { take } from 'rxjs';
 import { DEFAULT_RECORD_EVENT } from '../../../constants/default-values.constants';
-import { StartDiaryReplay } from '../../../store/diary-feature/actions';
+import { DiaryPageActions } from '../../../store/diary-feature/actions';
 
 @Injectable()
 export class MediaControlService extends IMediaControlService {
@@ -26,7 +26,7 @@ export class MediaControlService extends IMediaControlService {
           );
         });
 
-      this.store.dispatch(StartDiaryReplay());
+      this.store.dispatch(DiaryPageActions.startDiaryReplay());
     } else {
       this._replayService.play();
     }

@@ -1,14 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  DiaryPageData,
-  RecordEvent,
-} from '../../../models/keystroke-data.model';
-import { testData } from '../diary/testData';
-import { Form, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { KeyCodeMapping } from '../../../constants/keyboard-map.constants';
 import { AvailableKeyCodes } from '../../../enum/keyboard-key.enum';
 import { IReplayService } from '../../../iservices/IReplayService';
-import { Subject } from 'rxjs';
 import {
   DEFAULT_FORM_CONTROL,
   DEFAULT_RECORD_EVENT,
