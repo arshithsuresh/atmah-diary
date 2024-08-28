@@ -1,9 +1,4 @@
-import {
-  createAction,
-  createActionGroup,
-  emptyProps,
-  props,
-} from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { RecordEvent } from '../../models/keystroke-data.model';
 
 export const DiaryPageActions = createActionGroup({

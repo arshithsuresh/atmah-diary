@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { DiaryViewComponent } from './diary-view.component';
-import { RouterModule, TitleStrategy } from '@angular/router';
+import { provideRouter, RouterModule, TitleStrategy } from '@angular/router';
 import { diaryRoutes } from './diary.routes';
 import { IReplayService } from '../../iservices/IReplayService';
 import { ReplayKeystrokeService } from './services/replay-keystroke.service';
@@ -17,7 +17,7 @@ import { KeyboardSoundsService } from './services/keyboard-sounds.service';
 
 @NgModule({
   declarations: [],
-  imports: [DiaryViewComponent, RouterModule.forChild(diaryRoutes)],
+  imports: [DiaryViewComponent],
   exports: [RouterModule],
   providers: [
     { provide: IReplayService, useClass: ReplayKeystrokeService },
@@ -25,6 +25,7 @@ import { KeyboardSoundsService } from './services/keyboard-sounds.service';
     { provide: TitleStrategy, useClass: DiaryViewTitleResolver },
     { provide: IDiaryDataService, useClass: DiaryDataService },
     KeyboardSoundsService,
+    provideRouter(diaryRoutes),
     provideState(DiaryPageFeature),
     provideEffects(DiaryEffects),
   ],

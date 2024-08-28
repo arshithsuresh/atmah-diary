@@ -24,4 +24,8 @@ export const diaryRoutes: Routes = [
       },
     ],
   },
+  {
+    path: '**',
+    redirectTo: 'view',
+  },
 ];

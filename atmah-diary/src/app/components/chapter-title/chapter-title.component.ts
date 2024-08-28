@@ -8,8 +8,6 @@ import {
 
 import { KeypressRecordableComponent } from '../../base/RecordableComponent.base';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DiaryPageFeature } from '../../store/diary-feature';
-import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'atmah-chapter-title',

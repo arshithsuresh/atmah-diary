@@ -9,4 +9,8 @@ export const routes: Routes = [
       import('./views/diary/diary-view.module').then(m => m.DiaryViewModule),
     providers: [],
   },
+  {
+    path: '**',
+    redirectTo: 'diary/view',
+  },
 ];

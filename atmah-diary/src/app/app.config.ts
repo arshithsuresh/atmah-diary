@@ -12,7 +12,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideStore(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-
     provideRouter(routes),
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
