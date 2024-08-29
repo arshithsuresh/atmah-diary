@@ -55,7 +55,7 @@ export abstract class KeypressRecordableComponent
   protected inRecordingPage: boolean = inject(CAN_RECORD_TOKEN);
 
   private currentSelectedComponent = this.store
-    .select(DiaryPageFeature.selectCurrentComponent)
+    .select(DiaryPageFeature.selectActiveComponent)
     .pipe(takeUntil(this.$destroyed));
 
   private _pageDataSelector = this.store

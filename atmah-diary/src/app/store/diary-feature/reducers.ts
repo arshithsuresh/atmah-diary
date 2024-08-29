@@ -7,7 +7,8 @@ import { testData } from '../../views/diary/diary/testData';
 
 export const initialState: DiaryPageState = {
   registeredComponents: new Map(),
-  currentComponent: NO_SELECTED_COMPONENT,
+  focusedComponent: NO_SELECTED_COMPONENT,
+  activeComponent: NO_SELECTED_COMPONENT,
   pageData: testData,
   currentRecordEventIndex: 0,
   loading: false,
@@ -45,7 +46,7 @@ export const DiaryPageReducer = createReducer(
         console.warn('Component not registered');
         return { ...state };
       }
-      return { ...state, currentComponent: componentId };
+      return { ...state, focusedComponent: componentId };
     }
   ),
 
@@ -59,14 +60,14 @@ export const DiaryPageReducer = createReducer(
   }),
 
   on(DiaryPageActions.setNextRecordEvent, (state: DiaryPageState, { data }) => {
-    return { ...state, currentComponent: data.componentId };
+    return { ...state, activeComponent: data.componentId };
   }),
 
   on(DiaryPageActions.startDiaryReplay, (state: DiaryPageState) => {
     console.log('Start Diary Replay');
     const currentRecordEvent =
       state.pageData.pageEvents[state.currentRecordEventIndex];
-    return { ...state, currentComponent: currentRecordEvent.componentId };
+    return { ...state, activeComponent: currentRecordEvent.componentId };
   }),
 
   on(DiaryPageActions.diaryReplayCompleted, (state: DiaryPageState) => {
@@ -75,7 +76,7 @@ export const DiaryPageReducer = createReducer(
     return {
       ...state,
       currentRecordEventIndex: 0,
-      currentComponent: NO_SELECTED_COMPONENT,
+      activeComponent: NO_SELECTED_COMPONENT,
     };
   })
 );

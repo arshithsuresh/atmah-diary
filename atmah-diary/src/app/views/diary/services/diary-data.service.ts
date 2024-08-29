@@ -10,8 +10,6 @@ import { RecordEvent } from '../../../models/keystroke-data.model';
   providedIn: 'root',
 })
 export class DiaryDataService extends IDiaryDataService implements OnDestroy {
-  protected diaryStore = inject(Store<DiaryPageState>);
-
   constructor() {
     super();
   }

@@ -4,7 +4,8 @@ import { DiaryPageData } from '../../models/keystroke-data.model';
 
 export interface DiaryPageState {
   registeredComponents: Map<string, boolean>;
-  currentComponent: string;
+  focusedComponent: string;
+  activeComponent: string;
   pageData: DiaryPageData;
   currentRecordEventIndex: number;
   loading: boolean;

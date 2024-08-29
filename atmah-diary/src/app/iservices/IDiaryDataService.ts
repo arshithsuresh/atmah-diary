@@ -3,6 +3,8 @@ import { IReplayService } from './IReplayService';
 import { IRecorderService } from './IRecorderService';
 import { Observable, Subject } from 'rxjs';
 import { RecordEvent } from '../models/keystroke-data.model';
+import { Store } from '@ngrx/store';
+import { DiaryPageState } from '../store/diary-feature';
 
 @Injectable()
 export abstract class IDiaryDataService {
@@ -10,6 +12,8 @@ export abstract class IDiaryDataService {
 
   protected replayService = inject(IReplayService);
   protected recorderService = inject(IRecorderService);
+  protected diaryStore = inject(Store<DiaryPageState>);
+
   protected dispose$ = this._dispose.asObservable();
 
   dispose(): void {
