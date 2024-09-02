@@ -11,7 +11,9 @@ export const DiaryPageActions = createActionGroup({
 
     RecordEventAction: props<{ data: RecordEvent }>(),
 
-    FocusRecordableComponent: props<{ componentId: string }>(),
+    SetFocusRecordableComponent: props<{ componentId: string }>(),
+
+    SetActiveRecordableComponent: props<{ componentId: string }>(),
 
     RecordEventCompleted: emptyProps(),
 

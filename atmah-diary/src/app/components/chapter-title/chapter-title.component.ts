@@ -8,6 +8,7 @@ import {
 
 import { KeypressRecordableComponent } from '../../base/RecordableComponent.base';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DiaryPageState } from '../../store/diary-feature';
 
 @Component({
   selector: 'atmah-chapter-title',
@@ -17,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [ReactiveFormsModule],
 })
 export class ChapterTitleComponent
-  extends KeypressRecordableComponent
+  extends KeypressRecordableComponent<DiaryPageState>
   implements AfterViewInit
 {
   @ViewChild('titleArea') titleTextArea!: ElementRef;

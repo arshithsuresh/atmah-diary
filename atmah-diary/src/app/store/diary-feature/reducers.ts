@@ -39,7 +39,7 @@ export const DiaryPageReducer = createReducer(
   ),
 
   on(
-    DiaryPageActions.focusRecordableComponent,
+    DiaryPageActions.setFocusRecordableComponent,
     (state: DiaryPageState, { componentId }) => {
       const currentComponent = state.registeredComponents.get(componentId);
       if (!state.registeredComponents.get(componentId)) {
@@ -49,6 +49,10 @@ export const DiaryPageReducer = createReducer(
       return { ...state, focusedComponent: componentId };
     }
   ),
+
+  on(DiaryPageActions.setActiveRecordableComponent, (state: DiaryPageState) => {
+    return state;
+  }),
 
   on(DiaryPageActions.recordEventCompleted, (state: DiaryPageState) => {
     const nextRecordEventIndex = state.currentRecordEventIndex + 1;

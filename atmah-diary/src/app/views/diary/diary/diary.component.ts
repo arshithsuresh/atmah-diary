@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { KeypressRecordableComponent } from '../../../base/RecordableComponent.base';
+import { DiaryPageState } from '../../../store/diary-feature';
 
 @Component({
   selector: 'atmah-diary',
@@ -10,7 +11,7 @@ import { KeypressRecordableComponent } from '../../../base/RecordableComponent.b
   imports: [ReactiveFormsModule],
 })
 export class DiaryComponent
-  extends KeypressRecordableComponent
+  extends KeypressRecordableComponent<DiaryPageState>
   implements AfterViewInit
 {
   constructor() {

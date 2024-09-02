@@ -9,3 +9,5 @@ export const DEFAULT_RECORD_EVENT: RecordEvent = {
 export const DEFAULT_FORM_CONTROL: FormControl = new FormControl(
   'default-null-form-control'
 );
+
+export const DEFAULT_COMPONENT_NAME: string = 'null component';

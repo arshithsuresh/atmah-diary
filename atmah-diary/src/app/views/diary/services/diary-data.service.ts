@@ -1,8 +1,8 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { IDiaryDataService } from '../../../iservices/IDiaryDataService';
-import { DiaryPageFeature, DiaryPageState } from '../../../store/diary-feature';
-import { select, Store } from '@ngrx/store';
-import { defaultIfEmpty, take, takeUntil } from 'rxjs';
+import { DiaryPageFeature } from '../../../store/diary-feature';
+import { select } from '@ngrx/store';
+import { take, takeUntil } from 'rxjs';
 import { DiaryPageActions } from '../../../store/diary-feature/actions';
 import { RecordEvent } from '../../../models/keystroke-data.model';
 

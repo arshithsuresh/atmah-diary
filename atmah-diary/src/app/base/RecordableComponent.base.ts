@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostBinding,
   HostListener,
   inject,
   Input,
@@ -28,7 +27,7 @@ import { CAN_RECORD_TOKEN } from '../tokens/can-record.token';
 @Component({
   template: '',
 })
-export abstract class KeypressRecordableComponent
+export abstract class KeypressRecordableComponent<FState>
   implements AfterViewInit, OnDestroy
 {
   @HostListener('click', ['$event'])
@@ -47,15 +46,15 @@ export abstract class KeypressRecordableComponent
   @Output('selected')
   $componentSelected: EventEmitter<void> = new EventEmitter();
 
-  protected store = inject(Store<DiaryPageState>);
+  protected store = inject(Store<FState>);
   protected $destroyed: Subject<void> = new Subject();
   protected isSelectedComponent: boolean = false;
   protected keyStrokeRecorder: IRecorderService = inject(IRecorderService);
   protected keyReplay: IReplayService = inject(IReplayService);
   protected inRecordingPage: boolean = inject(CAN_RECORD_TOKEN);
 
-  private currentSelectedComponent = this.store
-    .select(DiaryPageFeature.selectActiveComponent)
+  private currentFocusedComponent = this.store
+    .select(DiaryPageFeature.selectFocusedComponent)
     .pipe(takeUntil(this.$destroyed));
 
   private _pageDataSelector = this.store
@@ -93,7 +92,7 @@ export abstract class KeypressRecordableComponent
     this.addEventListeners();
     this.registerRecordableComponent();
 
-    this.currentSelectedComponent
+    this.currentFocusedComponent
       .pipe(map(selectedComponent => this.recorderId == selectedComponent))
       .subscribe(isSelected => {
         this.isSelectedComponent = isSelected;
@@ -126,7 +125,7 @@ export abstract class KeypressRecordableComponent
     if (this.isSelectedComponent) return;
 
     this.store.dispatch(
-      DiaryPageActions.focusRecordableComponent({
+      DiaryPageActions.setFocusRecordableComponent({
         componentId: this.recorderId,
       })
     );
@@ -137,7 +136,7 @@ export abstract class KeypressRecordableComponent
       event.preventDefault();
       return;
     }
-
+    console.log('Key Down ');
     this.keyStrokeRecorder.recordAction(event);
 
     if (event.code == 'Enter') {

@@ -4,12 +4,13 @@ import { KeyCodeMapping } from '../../../constants/keyboard-map.constants';
 import { RecordEvent } from '../../../models/keystroke-data.model';
 import { isCharacter } from '../../../utils/stringFunctions';
 import { IRecorderService } from '../../../iservices/IRecorderService';
+import { DEFAULT_COMPONENT_NAME } from '../../../constants/default-values.constants';
 
 @Injectable()
 export class KeystrokeRecorderService extends IRecorderService {
   private _lastActionTime: number = -1;
 
-  pageData: RecordEvent = { keyData: [], componentId: 'null' };
+  pageData: RecordEvent = { keyData: [], componentId: DEFAULT_COMPONENT_NAME };
 
   constructor() {
     super();

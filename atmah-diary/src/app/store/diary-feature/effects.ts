@@ -76,3 +76,27 @@ export const resumeDiaryReplay = createEffect(
   },
   { functional: true, dispatch: false }
 );
+
+export const setActiveComponent = createEffect(
+  (action$ = inject(Actions)) => {
+    return action$.pipe(
+      ofType(DiaryPageActions.setActiveRecordableComponent),
+      tap(() => {
+        console.log('Set active component');
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);
+
+export const setFocusedComponent = createEffect(
+  (action$ = inject(Actions)) => {
+    return action$.pipe(
+      ofType(DiaryPageActions.setFocusRecordableComponent),
+      tap(() => {
+        console.log('Set focused component');
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);

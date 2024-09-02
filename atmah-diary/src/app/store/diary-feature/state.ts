@@ -1,5 +1,3 @@
-import { Type } from '@angular/core';
-import { KeypressRecordableComponent } from '../../base/RecordableComponent.base';
 import { DiaryPageData } from '../../models/keystroke-data.model';
 
 export interface DiaryPageState {
