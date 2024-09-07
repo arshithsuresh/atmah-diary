@@ -36,6 +36,11 @@ export class KeystrokeRecorderService extends IRecorderService {
       event.shiftKey
     );
 
+    this.pageData.keyData.push({
+      k: keyCharacter,
+      w: waitTime,
+    });
+
     this._lastActionTime = Date.now();
   }
 
@@ -50,11 +55,6 @@ export class KeystrokeRecorderService extends IRecorderService {
     if (shift && isCharacter(keyCharacter)) {
       keyCharacter = keyCharacter?.toUpperCase();
     }
-
-    this.pageData.keyData.push({
-      k: keyCharacter,
-      w: waitTime,
-    });
 
     return [keyCharacter, waitTime];
   }
