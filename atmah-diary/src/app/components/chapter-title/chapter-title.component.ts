@@ -31,7 +31,7 @@ export class ChapterTitleComponent
     super.ngAfterViewInit();
   }
 
-  override onFocus(): void {
+  onFocus(): void {
     this.componentSelected();
   }
 }

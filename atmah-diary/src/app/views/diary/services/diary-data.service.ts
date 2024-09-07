@@ -4,12 +4,15 @@ import { DiaryPageFeature } from '../../../store/diary-feature';
 import { select } from '@ngrx/store';
 import { take, takeUntil } from 'rxjs';
 import { DiaryPageActions } from '../../../store/diary-feature/actions';
-import { RecordEvent } from '../../../models/keystroke-data.model';
+import { Keystroke, RecordEvent } from '../../../models/keystroke-data.model';
+import { DEFAULT_COMPONENT_NAME } from '../../../constants/default-values.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DiaryDataService extends IDiaryDataService implements OnDestroy {
+  pageData: RecordEvent = { keyData: [], componentId: DEFAULT_COMPONENT_NAME };
+
   constructor() {
     super();
   }
@@ -25,6 +28,13 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
       .subscribe(() => {
         this.diaryStore.dispatch(DiaryPageActions.recordEventCompleted());
       });
+
+    this.recorderService.newRecordEvent$
+      .pipe(takeUntil(this.dispose$))
+      .subscribe(({ component, key }) => {
+        console.log('Component: ', component);
+        this.addRecordEvent(component, key);
+      });
   }
 
   getNextRecordEvent() {
@@ -34,11 +44,29 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
     );
   }
 
-  addRecordEvent(componentid: string): void {
-    throw new Error('Method not implemented.');
+  createNewPageData(componentId: string): void {
+    this.pageData = { keyData: [], componentId: componentId };
   }
+
+  addRecordEvent(componentId: string, keyData: Keystroke): void {
+    if (this.pageData.componentId != componentId) {
+      console.log('Saving and creating a new Record Event');
+      this.saveRecordEvent();
+      this.createNewPageData(componentId);
+    }
+
+    this.pageData.keyData.push(keyData);
+  }
+
   saveRecordEvent(): void {
-    throw new Error('Method not implemented.');
+    if (this.pageData.componentId == DEFAULT_COMPONENT_NAME) {
+      console.log('Discarding record event: DEFAULT COMPONENT');
+      return;
+    }
+
+    this.diaryStore.dispatch(
+      DiaryPageActions.recordEventAction({ data: this.pageData })
+    );
   }
 
   setNextReplayRecordEvent(data: RecordEvent): void {

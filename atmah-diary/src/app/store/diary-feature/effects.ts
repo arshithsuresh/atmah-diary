@@ -77,6 +77,25 @@ export const resumeDiaryReplay = createEffect(
   { functional: true, dispatch: false }
 );
 
+export const startRecording = createEffect(
+  (action$ = inject(Actions)) => {
+    return action$.pipe(ofType(DiaryPageActions.startRecording));
+  },
+  { functional: true, dispatch: false }
+);
+
+export const stopRecording = createEffect(
+  (action$ = inject(Actions), diaryDataService = inject(IDiaryDataService)) => {
+    return action$.pipe(
+      ofType(DiaryPageActions.stopRecording),
+      tap(() => {
+        diaryDataService.saveRecordEvent();
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);
+
 export const setActiveComponent = createEffect(
   (action$ = inject(Actions)) => {
     return action$.pipe(
@@ -93,8 +112,8 @@ export const setFocusedComponent = createEffect(
   (action$ = inject(Actions)) => {
     return action$.pipe(
       ofType(DiaryPageActions.setFocusRecordableComponent),
-      tap(() => {
-        console.log('Set focused component');
+      tap(({ componentId }) => {
+        console.log('Set focused component : ', componentId);
       })
     );
   },

@@ -25,6 +25,10 @@ export const DiaryPageActions = createActionGroup({
 
     PauseDiaryReplay: emptyProps(),
 
+    StartRecording: emptyProps(),
+
+    StopRecording: emptyProps(),
+
     DiaryReplayCompleted: emptyProps(),
   },
 });

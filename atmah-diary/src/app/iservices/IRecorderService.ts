@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { AvailableKeyCodes } from '../enum/keyboard-key.enum';
-import { RecordEvent } from '../models/keystroke-data.model';
+import { Keystroke, RecordEvent } from '../models/keystroke-data.model';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { DEFAULT_COMPONENT_NAME } from '../constants/default-values.constants';
 
@@ -8,8 +8,11 @@ import { DEFAULT_COMPONENT_NAME } from '../constants/default-values.constants';
 export abstract class IRecorderService implements OnDestroy {
   private _canRecord: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private _destroyed: Subject<void> = new Subject();
-  private _activeComponent: string = DEFAULT_COMPONENT_NAME;
-  private _focusedComponent: string = DEFAULT_COMPONENT_NAME;
+
+  private _newRecordEvent: Subject<{ component: string; key: Keystroke }> =
+    new Subject();
+
+  newRecordEvent$ = this._newRecordEvent.asObservable();
 
   canRecord$ = this._canRecord.pipe(takeUntil(this._destroyed));
 
@@ -17,18 +20,11 @@ export abstract class IRecorderService implements OnDestroy {
     return this._canRecord.value;
   }
 
-  get focusedComponent() {
-    return this._focusedComponent;
-  }
-  set focusedComponent(component: string) {
-    this._focusedComponent = component;
-  }
-
-  get activeComponent() {
-    return this._activeComponent;
-  }
-  set activeComponent(component: string) {
-    this._activeComponent = component;
+  nextRecordEvent(component: string, keycode: string, waitTime: number) {
+    this._newRecordEvent.next({
+      component: component,
+      key: { k: keycode, w: waitTime },
+    });
   }
 
   startRecording() {
@@ -45,7 +41,7 @@ export abstract class IRecorderService implements OnDestroy {
   }
 
   abstract pageData: RecordEvent;
-  abstract recordAction(event: KeyboardEvent): void;
+  abstract recordAction(event: KeyboardEvent, componentId: string): void;
   abstract recordKey(
     keycode: AvailableKeyCodes,
     waitTime: number,

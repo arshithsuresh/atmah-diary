@@ -21,7 +21,7 @@ export class KeystrokeRecorderService extends IRecorderService {
     });
   }
 
-  recordAction(event: KeyboardEvent) {
+  recordAction(event: KeyboardEvent, componentId: string) {
     if (!this.isRecording) return;
 
     const currentTime = Date.now();
@@ -36,10 +36,7 @@ export class KeystrokeRecorderService extends IRecorderService {
       event.shiftKey
     );
 
-    this.pageData.keyData.push({
-      k: keyCharacter,
-      w: waitTime,
-    });
+    this.nextRecordEvent(componentId, keyCharacter, waitTime);
 
     this._lastActionTime = Date.now();
   }

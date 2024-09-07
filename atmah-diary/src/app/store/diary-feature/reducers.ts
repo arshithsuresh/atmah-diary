@@ -8,7 +8,12 @@ import { testData } from '../../views/diary/diary/testData';
 export const initialState: DiaryPageState = {
   registeredComponents: new Map(),
   focusedComponent: NO_SELECTED_COMPONENT,
-  activeComponent: NO_SELECTED_COMPONENT,
+  // pageData: {
+  //   dated: Date.now(),
+  //   initialPageTitle: 'Title Goes here...',
+  //   pageEvents: [],
+  //   pageIndex: 0,
+  // },
   pageData: testData,
   currentRecordEventIndex: 0,
   loading: false,
@@ -17,7 +22,15 @@ export const initialState: DiaryPageState = {
 export const DiaryPageReducer = createReducer(
   initialState,
   on(DiaryPageActions.recordEventAction, (state, { data }) => {
-    return state;
+    const pageEvents = [...state.pageData.pageEvents, data];
+
+    return {
+      ...state,
+      pageData: {
+        ...state.pageData,
+        pageEvents: pageEvents,
+      },
+    };
   }),
 
   on(
@@ -42,7 +55,7 @@ export const DiaryPageReducer = createReducer(
     DiaryPageActions.setFocusRecordableComponent,
     (state: DiaryPageState, { componentId }) => {
       const currentComponent = state.registeredComponents.get(componentId);
-      if (!state.registeredComponents.get(componentId)) {
+      if (!currentComponent) {
         console.warn('Component not registered');
         return { ...state };
       }

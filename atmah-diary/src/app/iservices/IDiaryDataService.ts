@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { IReplayService } from './IReplayService';
 import { IRecorderService } from './IRecorderService';
 import { Observable, Subject } from 'rxjs';
-import { RecordEvent } from '../models/keystroke-data.model';
+import { Keystroke, RecordEvent } from '../models/keystroke-data.model';
 import { Store } from '@ngrx/store';
 import { DiaryPageState } from '../store/diary-feature';
 
@@ -24,6 +24,7 @@ export abstract class IDiaryDataService {
   abstract getNextRecordEvent(): Observable<RecordEvent | undefined>;
   abstract setNextReplayRecordEvent(data: RecordEvent): void;
 
-  abstract addRecordEvent(componentid: string): void;
+  abstract addRecordEvent(componentid: string, key: Keystroke): void;
   abstract saveRecordEvent(): void;
+  abstract createNewPageData(componentid: string): void;
 }

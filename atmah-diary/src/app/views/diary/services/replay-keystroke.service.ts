@@ -31,9 +31,11 @@ export class ReplayKeystrokeService extends IReplayService {
   constructor() {
     super();
   }
+
   initService() {
     this._soundService.initService();
   }
+
   setControl(control: FormControl, from?: string) {
     this.control = control;
   }

@@ -22,7 +22,7 @@ export class DiaryComponent
     super.ngAfterViewInit();
   }
 
-  override onFocus(): void {
+  onFocus(): void {
     this.componentSelected();
   }
 }

@@ -54,7 +54,7 @@ export abstract class KeypressRecordableComponent<FState>
   protected inRecordingPage: boolean = inject(CAN_RECORD_TOKEN);
 
   private currentFocusedComponent = this.store
-    .select(DiaryPageFeature.selectActiveComponent)
+    .select(DiaryPageFeature.selectFocusedComponent)
     .pipe(takeUntil(this.$destroyed));
 
   private _pageDataSelector = this.store
@@ -97,7 +97,7 @@ export abstract class KeypressRecordableComponent<FState>
       .subscribe(isSelected => {
         this.isSelectedComponent = isSelected;
 
-        if (this.isSelectedComponent && !this.inRecordingPage) {
+        if (this.isSelectedComponent) {
           console.log('Selected Component', this.recorderId);
           this.keyReplay.setControl(this.recordControl, this.recorderId);
         }
@@ -136,8 +136,8 @@ export abstract class KeypressRecordableComponent<FState>
       event.preventDefault();
       return;
     }
-    console.log('Key Down ');
-    this.keyStrokeRecorder.recordAction(event);
+
+    this.keyStrokeRecorder.recordAction(event, this.recorderId);
 
     if (event.code == 'Enter') {
       console.log(this.keyStrokeRecorder.pageData.keyData);
