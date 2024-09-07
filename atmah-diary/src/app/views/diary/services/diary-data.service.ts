@@ -34,7 +34,14 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
     );
   }
 
-  override setNextReplayRecordEvent(data: RecordEvent): void {
+  addRecordEvent(componentid: string): void {
+    throw new Error('Method not implemented.');
+  }
+  saveRecordEvent(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  setNextReplayRecordEvent(data: RecordEvent): void {
     this.replayService.setRecordEvent(data);
   }
 }
