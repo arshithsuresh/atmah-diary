@@ -4,24 +4,25 @@ import { DiaryPageActions } from './actions';
 import { NO_SELECTED_COMPONENT } from '../../constants/state.constant';
 import * as DevErrors from '../../errors/dev-errors';
 import { testData } from '../../views/diary/diary/testData';
+import { DEFAULT_COMPONENT_NAME } from '../../constants/default-values.constants';
 
 export const initialState: DiaryPageState = {
   registeredComponents: new Map(),
   focusedComponent: NO_SELECTED_COMPONENT,
-  // pageData: {
-  //   dated: Date.now(),
-  //   initialPageTitle: 'Title Goes here...',
-  //   pageEvents: [],
-  //   pageIndex: 0,
-  // },
-  pageData: testData,
+  pageData: {
+    dated: Date.now(),
+    initialPageTitle: 'Title Goes here...',
+    pageEvents: [],
+    pageIndex: 0,
+  },
+  // pageData: testData,
   currentRecordEventIndex: 0,
   loading: false,
 };
 
 export const DiaryPageReducer = createReducer(
   initialState,
-  on(DiaryPageActions.recordEventAction, (state, { data }) => {
+  on(DiaryPageActions.recordEventAction, (state, { data }): DiaryPageState => {
     const pageEvents = [...state.pageData.pageEvents, data];
 
     return {
@@ -35,7 +36,7 @@ export const DiaryPageReducer = createReducer(
 
   on(
     DiaryPageActions.registerRecordableComponent,
-    (state: DiaryPageState, { componentId, component }) => {
+    (state: DiaryPageState, { componentId, component }): DiaryPageState => {
       let _registeredComponents = new Map(state.registeredComponents);
 
       if (_registeredComponents.has(componentId)) {
@@ -53,7 +54,7 @@ export const DiaryPageReducer = createReducer(
 
   on(
     DiaryPageActions.setFocusRecordableComponent,
-    (state: DiaryPageState, { componentId }) => {
+    (state: DiaryPageState, { componentId }): DiaryPageState => {
       const currentComponent = state.registeredComponents.get(componentId);
       if (!currentComponent) {
         console.warn('Component not registered');
@@ -63,37 +64,45 @@ export const DiaryPageReducer = createReducer(
     }
   ),
 
-  on(DiaryPageActions.setActiveRecordableComponent, (state: DiaryPageState) => {
-    return state;
-  }),
+  on(
+    DiaryPageActions.recordEventCompleted,
+    (state: DiaryPageState): DiaryPageState => {
+      const nextRecordEventIndex = state.currentRecordEventIndex + 1;
+      console.log('Next Record Event Index ', nextRecordEventIndex);
+      return {
+        ...state,
+        currentRecordEventIndex: nextRecordEventIndex,
+      };
+    }
+  ),
 
-  on(DiaryPageActions.recordEventCompleted, (state: DiaryPageState) => {
-    const nextRecordEventIndex = state.currentRecordEventIndex + 1;
-    console.log('Next Record Event Index ', nextRecordEventIndex);
-    return {
-      ...state,
-      currentRecordEventIndex: nextRecordEventIndex,
-    };
-  }),
-
-  on(DiaryPageActions.setNextRecordEvent, (state: DiaryPageState, { data }) => {
-    return { ...state, activeComponent: data.componentId };
-  }),
+  on(
+    DiaryPageActions.setNextRecordEvent,
+    (state: DiaryPageState, { data }): DiaryPageState => {
+      return { ...state, focusedComponent: data.componentId };
+    }
+  ),
 
   on(DiaryPageActions.startDiaryReplay, (state: DiaryPageState) => {
     console.log('Start Diary Replay');
     const currentRecordEvent =
       state.pageData.pageEvents[state.currentRecordEventIndex];
-    return { ...state, activeComponent: currentRecordEvent.componentId };
+    const currentComponent = currentRecordEvent
+      ? currentRecordEvent.componentId
+      : DEFAULT_COMPONENT_NAME;
+    return { ...state, focusedComponent: currentComponent };
   }),
 
-  on(DiaryPageActions.diaryReplayCompleted, (state: DiaryPageState) => {
-    console.log('Diary Replay Completed');
+  on(
+    DiaryPageActions.diaryReplayCompleted,
+    (state: DiaryPageState): DiaryPageState => {
+      console.log('Diary Replay Completed');
 
-    return {
-      ...state,
-      currentRecordEventIndex: 0,
-      activeComponent: NO_SELECTED_COMPONENT,
-    };
-  })
+      return {
+        ...state,
+        currentRecordEventIndex: 0,
+        focusedComponent: NO_SELECTED_COMPONENT,
+      };
+    }
+  )
 );

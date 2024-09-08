@@ -9,6 +9,7 @@ import {
 } from '../../../constants/default-values.constants';
 import { KeyboardSoundsService } from './keyboard-sounds.service';
 import { KeyboardSounds } from '../../../enum/key-sound.enum';
+import { SharedActionsService } from './shared-actions.service';
 
 @Injectable()
 export class ReplayKeystrokeService extends IReplayService {
@@ -16,6 +17,7 @@ export class ReplayKeystrokeService extends IReplayService {
   private _currentCharacterIndex: number = 0;
 
   private _soundService = inject(KeyboardSoundsService);
+  private _sharedActions = inject(SharedActionsService);
 
   get waitTime() {
     return this.recordEvent.keyData[this._currentWaitIndex].w / this.speedX;
@@ -45,6 +47,11 @@ export class ReplayKeystrokeService extends IReplayService {
       console.warn(
         `Couldn't start replaying: has control :${this.hasFormControl}, has record event : ${this.hasRecordEvent}, finished : ${this.done}`
       );
+      this.pauseReplay();
+
+      if (!this.done && !this.hasRecordEvent) {
+        console.error('Something is not right');
+      }
       return;
     }
 

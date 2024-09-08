@@ -4,6 +4,8 @@ import { IRecorderService } from './IRecorderService';
 
 @Injectable()
 export abstract class IMediaControlService {
+  private _replayCompleted: boolean = false;
+
   get currentSpeed(): number {
     return this._replayService.speed;
   }
@@ -13,6 +15,10 @@ export abstract class IMediaControlService {
 
   get isRecording(): boolean {
     return this._recorderService.isRecording;
+  }
+
+  get isCompleted() {
+    return this._replayCompleted;
   }
 
   protected _replayService: IReplayService = inject(IReplayService);
@@ -37,5 +43,9 @@ export abstract class IMediaControlService {
 
   fastBackward() {
     this._replayService.fastBackward();
+  }
+
+  replayCompleted() {
+    this._replayCompleted = true;
   }
 }

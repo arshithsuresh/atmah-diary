@@ -1,7 +1,12 @@
 <div class="controls">
   <atmah-fast-backward-button (clicked)="onFBackwardClick()" />
-  <atmah-play-button *ngIf="isPaused" (clicked)="onPlayClick()" />
-  <atmah-pause-button *ngIf="!isPaused" (clicked)="onPauseClick()" />
+  <atmah-play-button
+    *ngIf="isPaused && !isCompleted"
+    (clicked)="onPlayClick()" />
+  <atmah-pause-button
+    *ngIf="!isPaused && !isCompleted"
+    (clicked)="onPauseClick()" />
+  <atmah-replay-button *ngIf="isCompleted" (clicked)="onReplayClick()" />
   <atmah-fast-forward-button (clicked)="onFForwardClick()" />
   <atmah-record-button
     *ngIf="canRecord"

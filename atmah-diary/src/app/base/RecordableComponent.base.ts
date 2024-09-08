@@ -23,6 +23,7 @@ import { IReplayService } from '../iservices/IReplayService';
 import { AvailableKeyCodes } from '../enum/keyboard-key.enum';
 import { FormControl } from '@angular/forms';
 import { CAN_RECORD_TOKEN } from '../tokens/can-record.token';
+import { SharedActionsService } from '../views/diary/services/shared-actions.service';
 
 @Component({
   template: '',
@@ -51,6 +52,7 @@ export abstract class KeypressRecordableComponent<FState>
   protected isSelectedComponent: boolean = false;
   protected keyStrokeRecorder: IRecorderService = inject(IRecorderService);
   protected keyReplay: IReplayService = inject(IReplayService);
+  protected sharedActions: SharedActionsService = inject(SharedActionsService);
   protected inRecordingPage: boolean = inject(CAN_RECORD_TOKEN);
 
   private currentFocusedComponent = this.store

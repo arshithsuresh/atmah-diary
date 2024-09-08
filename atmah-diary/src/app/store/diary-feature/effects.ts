@@ -48,6 +48,7 @@ export const diaryReplayCompleted = createEffect(
       ofType(DiaryPageActions.diaryReplayCompleted),
       tap(() => {
         mediaControlService.pause();
+        mediaControlService.replayCompleted();
         replayService.resetReplay();
       })
     );
@@ -90,18 +91,6 @@ export const stopRecording = createEffect(
       ofType(DiaryPageActions.stopRecording),
       tap(() => {
         diaryDataService.saveRecordEvent();
-      })
-    );
-  },
-  { functional: true, dispatch: false }
-);
-
-export const setActiveComponent = createEffect(
-  (action$ = inject(Actions)) => {
-    return action$.pipe(
-      ofType(DiaryPageActions.setActiveRecordableComponent),
-      tap(() => {
-        console.log('Set active component');
       })
     );
   },

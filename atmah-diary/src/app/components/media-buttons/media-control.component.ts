@@ -20,6 +20,10 @@ export class MediaControlComponent {
     return this._isInEditMode;
   }
 
+  get isCompleted() {
+    return this._mediaControl.isCompleted;
+  }
+
   constructor(
     private _mediaControl: IMediaControlService,
     @Optional() @Inject(CAN_RECORD_TOKEN) private _isInEditMode: boolean = false
@@ -54,4 +58,6 @@ export class MediaControlComponent {
   onStopRecording() {
     this._mediaControl.stopRecording();
   }
+
+  onReplayClick() {}
 }
