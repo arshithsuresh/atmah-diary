@@ -17,14 +17,16 @@ export abstract class IMediaControlService {
     return this._recorderService.isRecording;
   }
 
-  get isCompleted() {
+  get isCompleted(): boolean {
     return this._replayCompleted;
   }
 
   protected _replayService: IReplayService = inject(IReplayService);
   protected _recorderService: IRecorderService = inject(IRecorderService);
 
-  constructor() {}
+  constructor() {
+    console.log('Initiated Media Service');
+  }
 
   abstract play(): void;
   abstract pause(): void;
@@ -45,6 +47,9 @@ export abstract class IMediaControlService {
     this._replayService.fastBackward();
   }
 
+  restartedReplay() {
+    this._replayCompleted = false;
+  }
   replayCompleted() {
     this._replayCompleted = true;
   }

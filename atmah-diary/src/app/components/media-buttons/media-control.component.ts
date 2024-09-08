@@ -1,6 +1,7 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { IMediaControlService } from '../../iservices/IMediaControlService';
 import { CAN_RECORD_TOKEN } from '../../tokens/can-record.token';
+import { SharedActionsService } from '../../views/diary/services/shared-actions.service';
 
 @Component({
   selector: 'atmah-media-control',
@@ -20,12 +21,13 @@ export class MediaControlComponent {
     return this._isInEditMode;
   }
 
-  get isCompleted() {
+  isCompleted() {
     return this._mediaControl.isCompleted;
   }
 
   constructor(
     private _mediaControl: IMediaControlService,
+    private _sharedAction: SharedActionsService,
     @Optional() @Inject(CAN_RECORD_TOKEN) private _isInEditMode: boolean = false
   ) {}
 
@@ -59,5 +61,8 @@ export class MediaControlComponent {
     this._mediaControl.stopRecording();
   }
 
-  onReplayClick() {}
+  onReplayClick() {
+    this._sharedAction.resetAllComponents();
+    this._mediaControl.play();
+  }
 }

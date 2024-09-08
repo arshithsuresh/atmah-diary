@@ -9,7 +9,6 @@ import {
 } from '../../../constants/default-values.constants';
 import { KeyboardSoundsService } from './keyboard-sounds.service';
 import { KeyboardSounds } from '../../../enum/key-sound.enum';
-import { SharedActionsService } from './shared-actions.service';
 
 @Injectable()
 export class ReplayKeystrokeService extends IReplayService {
@@ -17,7 +16,6 @@ export class ReplayKeystrokeService extends IReplayService {
   private _currentCharacterIndex: number = 0;
 
   private _soundService = inject(KeyboardSoundsService);
-  private _sharedActions = inject(SharedActionsService);
 
   get waitTime() {
     return this.recordEvent.keyData[this._currentWaitIndex].w / this.speedX;
@@ -89,6 +87,7 @@ export class ReplayKeystrokeService extends IReplayService {
 
     const nextCharacter =
       this.recordEvent.keyData[this._currentCharacterIndex].k;
+
     let newValue = this.control.value as string;
 
     this.playKeystrokeSound(nextCharacter);

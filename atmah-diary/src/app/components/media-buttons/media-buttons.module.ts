@@ -21,12 +21,6 @@ import { ReplayButtonComponent } from './replay-button/replay-button.component';
     ReplayButtonComponent,
   ],
   imports: [CommonModule],
-  providers: [
-    {
-      provide: IMediaControlService,
-      useClass: MediaControlService,
-    },
-  ],
   exports: [
     PlayButtonComponent,
     PauseButtonComponent,

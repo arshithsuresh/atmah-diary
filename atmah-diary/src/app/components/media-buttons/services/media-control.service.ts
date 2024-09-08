@@ -16,6 +16,8 @@ export class MediaControlService extends IMediaControlService {
   play(): void {
     if (!this._replayService.hasRecordEvent) {
       console.log('Starting from beginning');
+      this.restartedReplay();
+
       this.store
         .select(DiaryPageFeature.selectRecordEvent)
         .pipe(take(1))
@@ -31,7 +33,13 @@ export class MediaControlService extends IMediaControlService {
       this._replayService.play();
     }
   }
+
   pause(): void {
     this._replayService.pauseReplay();
+  }
+
+  override stopRecording(): void {
+    super.stopRecording();
+    this.store.dispatch(DiaryPageActions.stopRecording());
   }
 }

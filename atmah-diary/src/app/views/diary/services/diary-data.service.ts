@@ -49,6 +49,7 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
   }
 
   addRecordEvent(componentId: string, keyData: Keystroke): void {
+    console.log('Add Record Event!');
     if (this.pageData.componentId != componentId) {
       console.log('Saving and creating a new Record Event');
       this.saveRecordEvent();

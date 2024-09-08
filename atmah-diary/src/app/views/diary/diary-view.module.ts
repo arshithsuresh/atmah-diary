@@ -14,7 +14,8 @@ import { DiaryDataService } from './services/diary-data.service';
 import { provideEffects } from '@ngrx/effects';
 import * as DiaryEffects from '../../store/diary-feature/effects';
 import { KeyboardSoundsService } from './services/keyboard-sounds.service';
-import { SharedActionsService } from './services/shared-actions.service';
+import { IMediaControlService } from '../../iservices/IMediaControlService';
+import { MediaControlService } from '../../components/media-buttons/services/media-control.service';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,10 @@ import { SharedActionsService } from './services/shared-actions.service';
     { provide: IRecorderService, useClass: KeystrokeRecorderService },
     { provide: TitleStrategy, useClass: DiaryViewTitleResolver },
     { provide: IDiaryDataService, useClass: DiaryDataService },
-    SharedActionsService,
+    {
+      provide: IMediaControlService,
+      useClass: MediaControlService,
+    },
     KeyboardSoundsService,
     provideRouter(diaryRoutes),
     provideState(DiaryPageFeature),

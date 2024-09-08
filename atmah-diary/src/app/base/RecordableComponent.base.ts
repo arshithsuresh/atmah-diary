@@ -106,6 +106,15 @@ export abstract class KeypressRecordableComponent<FState>
 
         this.$componentSelected.emit();
       });
+
+    this.sharedActions.resetComponents$
+      .pipe(takeUntil(this.$destroyed))
+      .subscribe(componentId => {
+        if ((componentId && componentId == this.recorderId) || !componentId) {
+          this.recordControl.reset();
+          this.recordControl.setValue('');
+        }
+      });
   }
 
   addEventListeners() {

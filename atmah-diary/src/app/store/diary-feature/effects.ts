@@ -5,7 +5,10 @@ import { exhaustMap, map, tap } from 'rxjs';
 import { IDiaryDataService } from '../../iservices/IDiaryDataService';
 import { IMediaControlService } from '../../iservices/IMediaControlService';
 import { IReplayService } from '../../iservices/IReplayService';
-import { DEFAULT_RECORD_EVENT } from '../../constants/default-values.constants';
+import {
+  DEFAULT_COMPONENT_NAME,
+  DEFAULT_RECORD_EVENT,
+} from '../../constants/default-values.constants';
 
 export const recordEventCompleted = createEffect(
   (action$ = inject(Actions), diaryDataService = inject(IDiaryDataService)) => {
@@ -48,8 +51,8 @@ export const diaryReplayCompleted = createEffect(
       ofType(DiaryPageActions.diaryReplayCompleted),
       tap(() => {
         mediaControlService.pause();
-        mediaControlService.replayCompleted();
         replayService.resetReplay();
+        mediaControlService.replayCompleted();
       })
     );
   },
@@ -91,6 +94,7 @@ export const stopRecording = createEffect(
       ofType(DiaryPageActions.stopRecording),
       tap(() => {
         diaryDataService.saveRecordEvent();
+        diaryDataService.createNewPageData(DEFAULT_COMPONENT_NAME);
       })
     );
   },
