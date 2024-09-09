@@ -3,10 +3,8 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { provideState, provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { DiaryPageFeature } from './store/diary-feature';
 
 export const appConfig: ApplicationConfig = {
   providers: [
