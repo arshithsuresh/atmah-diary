@@ -22,8 +22,6 @@ export abstract class IDiaryDataService {
 
   abstract initialize(): void;
   abstract getNextRecordEvent(): Observable<RecordEvent | undefined>;
-  abstract setNextReplayRecordEvent(data: RecordEvent): void;
-
   abstract addRecordEvent(componentid: string, key: Keystroke): void;
   abstract saveRecordEvent(): void;
   abstract createNewPageData(componentid: string): void;

@@ -27,7 +27,7 @@ export class MediaControlComponent {
 
   constructor(
     private _mediaControl: IMediaControlService,
-    private _sharedAction: SharedActionsService,
+
     @Optional() @Inject(CAN_RECORD_TOKEN) private _isInEditMode: boolean = false
   ) {}
 
@@ -62,7 +62,6 @@ export class MediaControlComponent {
   }
 
   onReplayClick() {
-    this._sharedAction.resetAllComponents();
-    this._mediaControl.play();
+    this._mediaControl.replay();
   }
 }

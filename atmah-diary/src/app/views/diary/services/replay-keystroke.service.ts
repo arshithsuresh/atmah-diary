@@ -42,9 +42,6 @@ export class ReplayKeystrokeService extends IReplayService {
 
   startReplay() {
     if (!(this.hasFormControl && this.hasRecordEvent) || this.done) {
-      console.warn(
-        `Couldn't start replaying: has control :${this.hasFormControl}, has record event : ${this.hasRecordEvent}, finished : ${this.done}`
-      );
       this.pauseReplay();
 
       if (!this.done && !this.hasRecordEvent) {

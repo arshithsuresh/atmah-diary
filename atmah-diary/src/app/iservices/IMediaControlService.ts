@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { IReplayService } from './IReplayService';
 import { IRecorderService } from './IRecorderService';
+import { SharedActionsService } from '../views/diary/services/shared-actions.service';
 
 @Injectable()
 export abstract class IMediaControlService {
@@ -23,6 +24,7 @@ export abstract class IMediaControlService {
 
   protected _replayService: IReplayService = inject(IReplayService);
   protected _recorderService: IRecorderService = inject(IRecorderService);
+  protected _sharedAction: SharedActionsService = inject(SharedActionsService);
 
   constructor() {
     console.log('Initiated Media Service');
@@ -45,6 +47,11 @@ export abstract class IMediaControlService {
 
   fastBackward() {
     this._replayService.fastBackward();
+  }
+
+  replay() {
+    this._sharedAction.resetAllComponents();
+    this.play();
   }
 
   restartedReplay() {

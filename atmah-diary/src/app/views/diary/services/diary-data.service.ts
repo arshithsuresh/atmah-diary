@@ -69,8 +69,4 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
       DiaryPageActions.recordEventAction({ data: this.pageData })
     );
   }
-
-  setNextReplayRecordEvent(data: RecordEvent): void {
-    this.replayService.setRecordEvent(data);
-  }
 }

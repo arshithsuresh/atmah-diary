@@ -22,10 +22,16 @@ export class MediaControlService extends IMediaControlService {
         .select(DiaryPageFeature.selectRecordEvent)
         .pipe(take(1))
         .subscribe(recordData => {
+          console.log(
+            '🚀 ~ MediaControlService ~ play ~ recordData - setRecordEvent',
+            recordData
+          );
+
           this._replayService.setRecordEvent(
             recordData ?? DEFAULT_RECORD_EVENT,
             false
           );
+          this.replay();
         });
 
       this.store.dispatch(DiaryPageActions.startDiaryReplay());
