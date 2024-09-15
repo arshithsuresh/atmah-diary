@@ -13,6 +13,10 @@ export class MediaControlComponent {
     return this._mediaControl.isPaused;
   }
 
+  get isRecording() {
+    return this._mediaControl.isRecording;
+  }
+
   get speed() {
     return this._mediaControl.currentSpeed;
   }
@@ -52,7 +56,7 @@ export class MediaControlComponent {
   }
 
   onStartRecording() {
-    if (!this.canRecord) return;
+    if (!this.canRecord && !this.isPaused) return;
 
     this._mediaControl.startRecording();
   }
@@ -62,6 +66,8 @@ export class MediaControlComponent {
   }
 
   onReplayClick() {
+    if (this.isRecording) return;
+
     this._mediaControl.replay();
   }
 }

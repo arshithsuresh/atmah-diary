@@ -26,6 +26,10 @@ button {
       height: 30px;
     }
   }
+
+  &:disabled:hover {
+    cursor: not-allowed;
+  }
 }
 
 @keyframes entryAnimation {

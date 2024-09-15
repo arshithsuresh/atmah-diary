@@ -1,14 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MediaButtonBase } from '../media-button.base';
 
 @Component({
   selector: 'atmah-replay-button',
   templateUrl: './replay-button.component.html',
   styleUrl: './replay-button.component.scss',
 })
-export class ReplayButtonComponent {
-  @Output() clicked: EventEmitter<void> = new EventEmitter();
-
-  onClick() {
-    this.clicked.emit();
-  }
-}
+export class ReplayButtonComponent extends MediaButtonBase {}

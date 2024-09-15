@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MediaButtonBase } from '../media-button.base';
 
 @Component({
   selector: 'atmah-record-button',
   templateUrl: './record-button.component.html',
   styleUrl: './record-button.component.scss',
 })
-export class RecordButtonComponent {
+export class RecordButtonComponent extends MediaButtonBase {
   @Output() onRecord: EventEmitter<void> = new EventEmitter();
   @Output() onStop: EventEmitter<void> = new EventEmitter();
 
@@ -17,7 +18,7 @@ export class RecordButtonComponent {
     return this.recording ? this.recordingColor : this.nonRecordingColor;
   }
 
-  onClick() {
+  override onClick() {
     if (this.recording) {
       this.onStop.emit();
     } else {

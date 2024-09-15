@@ -2,15 +2,20 @@
   <atmah-fast-backward-button (clicked)="onFBackwardClick()" />
   <atmah-play-button
     *ngIf="isPaused && !isCompleted()"
-    (clicked)="onPlayClick()" />
+    (clicked)="onPlayClick()"
+    [disabled]="isRecording" />
   <atmah-pause-button
     *ngIf="!isPaused && !isCompleted()"
     (clicked)="onPauseClick()" />
-  <atmah-replay-button *ngIf="isCompleted()" (clicked)="onReplayClick()" />
+  <atmah-replay-button
+    *ngIf="isCompleted()"
+    (clicked)="onReplayClick()"
+    [disabled]="isRecording" />
   <atmah-fast-forward-button (clicked)="onFForwardClick()" />
   <atmah-record-button
     *ngIf="canRecord"
     (onRecord)="onStartRecording()"
-    (onStop)="onStopRecording()" />
+    (onStop)="onStopRecording()"
+    [disabled]="!isPaused" />
 </div>
 <div class="speed-control">speed {{ speed }}x</div>
