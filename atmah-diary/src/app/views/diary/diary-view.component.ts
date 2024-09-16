@@ -28,6 +28,7 @@ export class DiaryViewComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
+    console.log(navigator.userAgent);
     this.diaryService.initialize();
   }
 
