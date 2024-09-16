@@ -2,7 +2,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { AvailableKeyCodes } from '../enum/keyboard-key.enum';
 import { Keystroke, RecordEvent } from '../models/keystroke-data.model';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
-import { DEFAULT_COMPONENT_NAME } from '../constants/default-values.constants';
 
 @Injectable()
 export abstract class IRecorderService implements OnDestroy {

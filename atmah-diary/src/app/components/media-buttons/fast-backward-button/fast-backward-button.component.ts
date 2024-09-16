@@ -1,9 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { MediaButtonBase } from '../media-button.base';
 
 @Component({

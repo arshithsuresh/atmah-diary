@@ -6,8 +6,6 @@ import { FastForwardButtonComponent } from './fast-forward-button/fast-forward-b
 import { FastBackwardButtonComponent } from './fast-backward-button/fast-backward-button.component';
 import { MediaControlComponent } from './media-control.component';
 import { RecordButtonComponent } from './record-button/record-button.component';
-import { IMediaControlService } from '../../iservices/IMediaControlService';
-import { MediaControlService } from './services/media-control.service';
 import { ReplayButtonComponent } from './replay-button/replay-button.component';
 
 @NgModule({

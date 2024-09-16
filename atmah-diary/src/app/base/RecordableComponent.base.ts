@@ -11,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DiaryPageState, DiaryPageFeature } from '../store/diary-feature';
+import { DiaryPageFeature } from '../store/diary-feature';
 import { map, Subject, takeUntil } from 'rxjs';
 import { DiaryPageActions } from '../store/diary-feature/actions';
 import {
@@ -170,6 +170,7 @@ export abstract class KeypressRecordableComponent<FState>
       event.code as AvailableKeyCodes,
       event.ctrlKey
     );
+
     const atEnd = this.checkIfAtEnd(
       (event.target as HTMLInputElement).selectionStart!
     );

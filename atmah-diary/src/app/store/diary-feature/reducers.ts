@@ -3,7 +3,6 @@ import { DiaryPageState } from './state';
 import { DiaryPageActions } from './actions';
 import { NO_SELECTED_COMPONENT } from '../../constants/state.constant';
 import * as DevErrors from '../../errors/dev-errors';
-import { testData } from '../../views/diary/diary/testData';
 import { DEFAULT_COMPONENT_NAME } from '../../constants/default-values.constants';
 
 export const initialState: DiaryPageState = {

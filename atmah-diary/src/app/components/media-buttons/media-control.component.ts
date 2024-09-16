@@ -1,7 +1,6 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { IMediaControlService } from '../../iservices/IMediaControlService';
 import { CAN_RECORD_TOKEN } from '../../tokens/can-record.token';
-import { SharedActionsService } from '../../views/diary/services/shared-actions.service';
 
 @Component({
   selector: 'atmah-media-control',

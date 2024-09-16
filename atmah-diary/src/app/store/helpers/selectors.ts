@@ -1,4 +1,4 @@
-import { MemoizedSelector, Selector, Store } from '@ngrx/store';
+import { MemoizedSelector, Store } from '@ngrx/store';
 import { take } from 'rxjs';
 
 export function selectOnceFromStore<T, Z>(
