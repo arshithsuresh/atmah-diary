@@ -1,3 +1,9 @@
+@import '../../../styles/mixins/responsive';
+:host {
+  --title-height: 90px;
+  --media-control-height: 70px;
+}
+
 .page-container {
   display: grid;
 }
@@ -41,6 +47,7 @@
   flex-direction: column;
   align-items: end;
 }
+
 .media-controls-container {
   display: inline-flex;
   flex-direction: column;
@@ -54,23 +61,77 @@
   flex: 1;
 }
 
-@media only screen and (max-width: 720px) {
+@include for-mobile {
   .page-container {
     display: grid;
+    overflow: hidden;
+    padding: 16px;
   }
 
   .media-controls-container {
     grid-column: 1;
     grid-row: 3;
+    height: var(--media-control-height);
+    padding: 0px;
+    align-items: center;
+    width: 100%;
+    z-index: 3;
   }
 
   .title-container {
     grid-column: 1;
     grid-row: 1;
-    grid-row: 1;
+    padding-right: 0px;
+    justify-self: start;
+    height: var(--title-height);
+    width: 100%;
+    padding-top: 16px;
+    z-index: 3;
   }
 
   .diary-container {
-    grid-column: 2;
+    display: block;
+    grid-column: 1;
+    grid-row: 2;
+    height: calc(100vh - var(--media-control-height) - var(--title-height));
+    margin-top: -14px;
+    position: relative;
+
+    &::after {
+      display: block;
+      content: '';
+      position: absolute;
+      height: 74px;
+      width: 100%;
+      background-color: red;
+      z-index: 2;
+      bottom: -30px;
+      background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 42%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    &::before {
+      display: block;
+      content: '';
+      position: absolute;
+      height: 72px;
+      width: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 42%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      z-index: 2;
+      top: -24px;
+    }
+  }
+
+  .right-spacer {
+    display: none;
   }
 }

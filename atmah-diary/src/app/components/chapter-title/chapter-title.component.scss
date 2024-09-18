@@ -1,3 +1,5 @@
+@import '../../../styles//mixins/responsive';
+
 .chapter-title-container {
   display: flex;
   flex-direction: column;
@@ -41,5 +43,36 @@
     min-width: 300px;
 
     margin-top: 8px;
+  }
+}
+
+@include for-mobile {
+  :host {
+    width: 100%;
+  }
+
+  .chapter-title-container {
+    .chapter-title {
+      text-align: left;
+      width: 100%;
+
+      .title {
+        text-align: left;
+        font-size: 24px;
+        font-family: 'IM Fell English', cursive;
+        text-align: left;
+        vertical-align: middle;
+        background-color: transparent;
+      }
+
+      .title-date {
+        margin-top: 0px;
+        font-size: 14px;
+      }
+    }
+
+    .media-controls {
+      align-items: start;
+    }
   }
 }
