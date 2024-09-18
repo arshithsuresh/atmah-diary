@@ -20,8 +20,6 @@ export class DiaryComponent
 
   override ngAfterViewInit(): void {
     super.ngAfterViewInit();
-
-    this.recordControl.patchValue(loremIpsum);
   }
 
   onFocus(): void {
