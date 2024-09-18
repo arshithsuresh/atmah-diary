@@ -4,17 +4,18 @@ import { DiaryPageActions } from './actions';
 import { NO_SELECTED_COMPONENT } from '../../constants/state.constant';
 import * as DevErrors from '../../errors/dev-errors';
 import { DEFAULT_COMPONENT_NAME } from '../../constants/default-values.constants';
+import { testData } from '../../views/diary/diary/testData';
 
 export const initialState: DiaryPageState = {
   registeredComponents: new Map(),
   focusedComponent: NO_SELECTED_COMPONENT,
-  pageData: {
-    dated: Date.now(),
-    initialPageTitle: 'Title Goes here...',
-    pageEvents: [],
-    pageIndex: 0,
-  },
-  //pageData: testData,
+  // pageData: {
+  //   dated: Date.now(),
+  //   initialPageTitle: 'Title Goes here...',
+  //   pageEvents: [],
+  //   pageIndex: 0,
+  // },
+  pageData: testData,
   currentRecordEventIndex: 0,
   loading: false,
 };
