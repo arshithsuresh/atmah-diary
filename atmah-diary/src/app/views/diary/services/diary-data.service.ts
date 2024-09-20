@@ -32,7 +32,6 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
     this.recorderService.newRecordEvent$
       .pipe(takeUntil(this.dispose$))
       .subscribe(({ component, key }) => {
-        console.log('Component: ', component);
         this.addRecordEvent(component, key);
       });
   }
@@ -49,9 +48,7 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
   }
 
   addRecordEvent(componentId: string, keyData: Keystroke): void {
-    console.log('Add Record Event!');
     if (this.pageData.componentId != componentId) {
-      console.log('Saving and creating a new Record Event');
       this.saveRecordEvent();
       this.createNewPageData(componentId);
     }
@@ -61,7 +58,6 @@ export class DiaryDataService extends IDiaryDataService implements OnDestroy {
 
   saveRecordEvent(): void {
     if (this.pageData.componentId == DEFAULT_COMPONENT_NAME) {
-      console.log('Discarding record event: DEFAULT COMPONENT');
       return;
     }
 

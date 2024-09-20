@@ -103,12 +103,7 @@ export const stopRecording = createEffect(
 
 export const setFocusedComponent = createEffect(
   (action$ = inject(Actions)) => {
-    return action$.pipe(
-      ofType(DiaryPageActions.setFocusRecordableComponent),
-      tap(({ componentId }) => {
-        console.log('Set focused component : ', componentId);
-      })
-    );
+    return action$.pipe(ofType(DiaryPageActions.setFocusRecordableComponent));
   },
   { functional: true, dispatch: false }
 );

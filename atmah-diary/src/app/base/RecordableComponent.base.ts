@@ -100,7 +100,6 @@ export abstract class KeypressRecordableComponent<FState>
         this.isSelectedComponent = isSelected;
 
         if (this.isSelectedComponent) {
-          console.log('Selected Component', this.recorderId);
           this.keyReplay.setControl(this.recordControl, this.recorderId);
         }
 
@@ -123,6 +122,11 @@ export abstract class KeypressRecordableComponent<FState>
     this.recorderElement.nativeElement.onselect = this.onDragEnter.bind(this);
   }
 
+  onInputEvent(event: Event): any {
+    const IEvent = event as InputEvent;
+    console.log(IEvent.data, IEvent.detail);
+  }
+
   registerRecordableComponent() {
     this.store.dispatch(
       DiaryPageActions.registerRecordableComponent({
@@ -143,6 +147,9 @@ export abstract class KeypressRecordableComponent<FState>
   }
 
   onKeyDown(event: KeyboardEvent) {
+    console.log(
+      `KeyCode : ${event.keyCode}, Key: ${event.key}, Code: ${event.code}, Type: ${event.type}`
+    );
     if (!this.canRecordKeys(event)) {
       event.preventDefault();
       return;
@@ -151,7 +158,7 @@ export abstract class KeypressRecordableComponent<FState>
     this.keyStrokeRecorder.recordAction(event, this.recorderId);
 
     if (event.code == 'Enter') {
-      console.log(this.keyStrokeRecorder.pageData.keyData);
+      //console.log(this.keyStrokeRecorder.pageData.keyData);
     }
   }
 

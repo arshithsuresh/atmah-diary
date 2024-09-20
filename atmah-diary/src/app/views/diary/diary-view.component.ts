@@ -32,7 +32,5 @@ export class DiaryViewComponent implements OnInit, AfterViewInit {
     this.diaryService.initialize();
   }
 
-  ngOnInit(): void {
-    console.log('Viewing :: ', this.routeData.snapshot.routeConfig?.path);
-  }
+  ngOnInit(): void {}
 }

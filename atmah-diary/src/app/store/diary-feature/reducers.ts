@@ -68,7 +68,7 @@ export const DiaryPageReducer = createReducer(
     DiaryPageActions.recordEventCompleted,
     (state: DiaryPageState): DiaryPageState => {
       const nextRecordEventIndex = state.currentRecordEventIndex + 1;
-      console.log('Next Record Event Index ', nextRecordEventIndex);
+
       return {
         ...state,
         currentRecordEventIndex: nextRecordEventIndex,
@@ -84,7 +84,6 @@ export const DiaryPageReducer = createReducer(
   ),
 
   on(DiaryPageActions.startDiaryReplay, (state: DiaryPageState) => {
-    console.log('Start Diary Replay');
     const currentRecordEvent =
       state.pageData.pageEvents[state.currentRecordEventIndex];
     const currentComponent = currentRecordEvent
@@ -96,8 +95,6 @@ export const DiaryPageReducer = createReducer(
   on(
     DiaryPageActions.diaryReplayCompleted,
     (state: DiaryPageState): DiaryPageState => {
-      console.log('Diary Replay Completed');
-
       return {
         ...state,
         currentRecordEventIndex: 0,

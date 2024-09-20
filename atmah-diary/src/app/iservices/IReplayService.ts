@@ -22,7 +22,6 @@ export abstract class IReplayService implements OnDestroy {
   protected _isPaused$ = this._isPaused.pipe(takeUntil(this.destroyed$));
 
   set speed(value: number) {
-    console.log(`New Speed ${this.speedControl(value)}`);
     this.speedX = this.speedControl(value);
   }
 
@@ -81,12 +80,10 @@ export abstract class IReplayService implements OnDestroy {
   }
 
   play() {
-    console.log('Resumed Playing!');
     this._isPaused.next(false);
   }
 
   pauseReplay() {
-    console.log('Paused Playing!');
     this._isPaused.next(true);
   }
   ngOnDestroy(): void {

@@ -26,9 +26,7 @@ export abstract class IMediaControlService {
   protected _recorderService: IRecorderService = inject(IRecorderService);
   protected _sharedAction: SharedActionsService = inject(SharedActionsService);
 
-  constructor() {
-    console.log('Initiated Media Service');
-  }
+  constructor() {}
 
   abstract play(): void;
   abstract pause(): void;
