@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environment/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +11,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  get isProduction() {
+    return environment.production;
+  }
   title = 'Atmah - Where the soul speaks';
 }

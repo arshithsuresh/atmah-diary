@@ -10,7 +10,19 @@ export const routes: Routes = [
     providers: [],
   },
   {
+    path: 'login',
+    loadChildren: () =>
+      import('./views/login/login.module').then(m => m.LoginModule),
+    providers: [],
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./views/dashboard/dashboard.module').then(m => m.DashboardModule),
+    providers: [],
+  },
+  {
     path: '**',
-    redirectTo: 'diary/view',
+    redirectTo: 'login',
   },
 ];
