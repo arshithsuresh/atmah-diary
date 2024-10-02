@@ -138,6 +138,12 @@
           outline: none;
           font-family: 'Indie Flower', cursive;
           font-weight: 600;
+
+          &:disabled {
+            font-family: 'Indie Flower', cursive;
+            font-weight: 600;
+            color: black;
+          }
         }
       }
     }

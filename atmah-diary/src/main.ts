@@ -7,6 +7,7 @@ if (environment.production) {
   window.console.log = (msg, ...options) => {};
 } else {
   window.console.log = (msg, ...options) => {
+    console.warn(msg, options);
     const pTag = document.createElement('p');
     pTag.innerHTML = msg;
     document.getElementById('logger-div')?.append(pTag);

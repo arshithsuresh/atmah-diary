@@ -27,6 +27,11 @@
       min-width: 310px;
       transition: all ease 0.4s;
       overflow: hidden;
+      background: transparent;
+
+      &:disabled {
+        color: black;
+      }
     }
 
     .title-date {

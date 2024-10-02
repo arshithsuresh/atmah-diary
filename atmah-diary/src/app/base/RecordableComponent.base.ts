@@ -24,6 +24,9 @@ import { AvailableKeyCodes } from '../enum/keyboard-key.enum';
 import { FormControl } from '@angular/forms';
 import { CAN_RECORD_TOKEN } from '../tokens/can-record.token';
 import { SharedActionsService } from '../views/diary/services/shared-actions.service';
+import { IKeyListenerService } from '../iservices/IKeyListenerService';
+import { PhysicalKeyboardListenerService } from '../views/diary/services/physical-keyboard-listener.service';
+import { KeyboardInput } from '../models/keyinput.model';
 
 @Component({
   template: '',
@@ -54,6 +57,8 @@ export abstract class KeypressRecordableComponent<FState>
   protected keyReplay: IReplayService = inject(IReplayService);
   protected sharedActions: SharedActionsService = inject(SharedActionsService);
   protected inRecordingPage: boolean = inject(CAN_RECORD_TOKEN);
+  protected keyListeners: IKeyListenerService<ElementRef> =
+    inject(IKeyListenerService);
 
   private currentFocusedComponent = this.store
     .select(DiaryPageFeature.selectFocusedComponent)
@@ -114,10 +119,21 @@ export abstract class KeypressRecordableComponent<FState>
           this.recordControl.setValue('');
         }
       });
+
+    if (!this.inRecordingPage) this.recordControl.disable();
   }
 
+  testKeyDown(input: KeyboardInput) {
+    console.log(`INPUT :: ${this.recorderId}`, input);
+  }
   addEventListeners() {
-    this.recorderElement.nativeElement.onkeydown = this.onKeyDown.bind(this);
+    // this.recorderElement.nativeElement.onkeypress = this.onKeyDown.bind(this);
+
+    // this.keyListeners.registerKeyDown(
+    //   this.recorderElement,
+    //   this.testKeyDown.bind(this)
+    // );
+
     this.recorderElement.nativeElement.onclick = this.onMouseDown.bind(this);
     this.recorderElement.nativeElement.onselect = this.onDragEnter.bind(this);
   }
@@ -147,13 +163,13 @@ export abstract class KeypressRecordableComponent<FState>
   }
 
   onKeyDown(event: KeyboardEvent) {
-    console.log(
-      `KeyCode : ${event.keyCode}, Key: ${event.key}, Code: ${event.code}, Type: ${event.type}`
-    );
+    event.preventDefault();
+    console.log(event.location);
     if (!this.canRecordKeys(event)) {
-      event.preventDefault();
-      return;
+      //return;
     }
+
+    this.recordControl.setValue(this.recordControl.value + 's');
 
     this.keyStrokeRecorder.recordAction(event, this.recorderId);
 

@@ -16,6 +16,8 @@ import * as DiaryEffects from '../../store/diary-feature/effects';
 import { KeyboardSoundsService } from './services/keyboard-sounds.service';
 import { IMediaControlService } from '../../iservices/IMediaControlService';
 import { MediaControlService } from '../../components/media-buttons/services/media-control.service';
+import { IKeyListenerService } from '../../iservices/IKeyListenerService';
+import { PhysicalKeyboardListenerService } from './services/physical-keyboard-listener.service';
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,11 @@ import { MediaControlService } from '../../components/media-buttons/services/med
       provide: IMediaControlService,
       useClass: MediaControlService,
     },
+    {
+      provide: IKeyListenerService,
+      useClass: PhysicalKeyboardListenerService,
+    },
+
     KeyboardSoundsService,
     provideRouter(diaryRoutes),
     provideState(DiaryPageFeature),
