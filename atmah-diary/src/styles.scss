@@ -1,4 +1,9 @@
-@import './styles/fonts/index.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './styles/fonts/index';
+@import './styles/common/index';
 @import 'dark/colors.scss';
 @import 'light/colors.scss';
 
