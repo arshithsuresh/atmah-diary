@@ -4,6 +4,9 @@
   position: absolute;
 }
 
+.login-container {
+  width: 312px;
+}
 .page-container {
   display: flex;
   flex-direction: column;
@@ -11,6 +14,7 @@
   align-items: center;
 
   .title-container {
+    text-align: center;
     h4 {
       font-size: toRem(40px);
       line-height: 1em;
@@ -50,9 +54,8 @@
 
     .action-container {
       margin-top: 24px;
+      text-align: center;
       button {
-        width: 100%;
-        height: 100%;
         position: relative;
         svg {
           position: relative;
