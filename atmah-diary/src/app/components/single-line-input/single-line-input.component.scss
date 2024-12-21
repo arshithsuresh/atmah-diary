@@ -1,0 +1,23 @@
+.input-pair {
+  display: flex;
+  flex-direction: column;
+
+  label {
+  }
+
+  .input-container {
+    width: 100%;
+    svg {
+      width: 100%;
+    }
+  }
+
+  input {
+    border: none;
+    width: 100%;
+    vertical-align: bottom;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}

@@ -9,15 +9,18 @@
     <div class="form-container">
       <p class="login-text primary-font">Login</p>
 
-      <div class="input-pair primary-font">
-        <label for="username">username</label>
-        <input type="text" name="username" id="username" />
-      </div>
+      <atmah-single-line-input
+        id="username"
+        placeholder="your username goes here...">
+        username
+      </atmah-single-line-input>
 
-      <div class="input-pair primary-font">
-        <label for="password">password</label>
-        <input type="text" name="password" id="password" />
-      </div>
+      <atmah-single-line-input
+        password
+        id="password"
+        placeholder="your password goes here...">
+        password
+      </atmah-single-line-input>
 
       <div class="action-container">
         <button class="btn btn-primary">
