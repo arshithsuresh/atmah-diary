@@ -1,0 +1,105 @@
+:host {
+  width: 100dvw;
+  height: 100dvh;
+  display: block;
+
+  --header-height: 48px;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--header-height));
+  width: 100%;
+  align-items: center;
+
+  .dashboard-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: min(900px, 80dvw);
+    height: calc(100dvh - var(--header-height));
+
+    .my-stories {
+      height: 430px;
+      margin-top: 32px;
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 48px;
+        top: -4px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 1) 20%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        z-index: 10;
+      }
+
+      &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 42px;
+        bottom: -4px;
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 1) 20%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        z-index: 10;
+      }
+
+      .scroll-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-count: 3;
+        gap: 8px;
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+        padding: 32px 0px;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    }
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+
+  .line {
+    display: block;
+    font-family: 'IM Fell English', serif;
+    width: 248px;
+
+    .n-text {
+      font-size: 14px;
+      line-height: 14px;
+    }
+
+    .h-text {
+      font-size: 32px;
+      line-height: 32px;
+    }
+  }
+
+  .r-align {
+    text-align: right;
+  }
+  .l-align {
+    text-align: left;
+  }
+}
