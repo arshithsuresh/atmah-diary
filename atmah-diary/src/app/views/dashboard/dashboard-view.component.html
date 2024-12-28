@@ -19,20 +19,9 @@
     </div>
     <div class="my-stories">
       <div class="scroll-container">
-        <atmah-story-card></atmah-story-card>
-        <atmah-story-card></atmah-story-card>
-        <atmah-story-card></atmah-story-card>
-
-        <atmah-story-card></atmah-story-card>
-        <atmah-story-card></atmah-story-card>
-        <atmah-story-card></atmah-story-card>
-
-        <atmah-story-card></atmah-story-card>
-        <atmah-story-card></atmah-story-card>
-        <atmah-story-card></atmah-story-card>
-
-        <atmah-story-card></atmah-story-card>
-        <atmah-story-card></atmah-story-card>
+        @for (story of myStories; track $index) {
+        <atmah-story-card [data]="story"> </atmah-story-card>
+        }
       </div>
     </div>
   </div>
