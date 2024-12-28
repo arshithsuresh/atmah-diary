@@ -103,3 +103,47 @@
     text-align: left;
   }
 }
+
+.leaf {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  z-index: 99;
+  overflow: hidden;
+
+  svg {
+    offset-path: path(
+      'M43 0.5C-10.5 106.667 -56.4 343.4 188 441C493.5 563 832 393.5 726 251C620 108.5 89.5 461.5 487.5 747C885.5 1032.5 618 1173 212.5 1167'
+    );
+    offset-position: 100px;
+    offset-distance: 0%;
+    offset-position: -200px 200px;
+    pointer-events: none;
+    transform: rotate(0deg);
+    animation: leaf-fall-1 8s cubic-bezier(0.3, 0.5, 0.2, 0.4) infinite;
+  }
+}
+
+@keyframes leaf-fall-1 {
+  0% {
+    offset-distance: 0%;
+  }
+
+  20% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    offset-distance: 100%;
+    transform: rotate(-180deg);
+  }
+}
