@@ -104,6 +104,34 @@
   }
 }
 
+.stories-nav {
+  display: flex;
+  flex-direction: row;
+  font-family: 'IM Fell English', serif;
+  font-size: 16px;
+  gap: 48px;
+  width: 100%;
+  margin-top: 18px;
+  justify-content: center;
+
+  .nav-link {
+    position: relative;
+    color: grey;
+
+    &.active {
+      font-weight: 600;
+      color: black;
+    }
+  }
+
+  hr {
+    display: block;
+    width: 2px;
+    height: 100%;
+    background-color: black;
+  }
+}
+
 .leaf {
   position: absolute;
   top: 0px;

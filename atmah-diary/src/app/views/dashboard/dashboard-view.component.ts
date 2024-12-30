@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { StoryCardModel } from '../../models/story-card.model';
 import { mockStories } from '../../mocks/story-cards.mocks';
 
 @Component({
@@ -11,4 +10,6 @@ export class DashboardViewComponent {
   get myStories() {
     return mockStories;
   }
+
+  constructor() {}
 }
