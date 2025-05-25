@@ -9,7 +9,6 @@ import { IDiaryDataService } from '../../iservices/IDiaryDataService';
 
 @Component({
   selector: 'view-diary',
-  standalone: true,
   imports: [
     FullPageContainerComponent,
     DiaryComponent,
@@ -17,7 +16,6 @@ import { IDiaryDataService } from '../../iservices/IDiaryDataService';
     MediaButtonsModule,
     RecordingIndicatorComponent,
   ],
-
   templateUrl: './diary-view.component.html',
   styleUrl: './diary-view.component.scss',
 })

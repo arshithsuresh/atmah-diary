@@ -11,11 +11,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DiaryPageState } from '../../store/diary-feature';
 
 @Component({
-  selector: 'atmah-chapter-title',
-  standalone: true,
-  templateUrl: './chapter-title.component.html',
-  styleUrl: './chapter-title.component.scss',
-  imports: [ReactiveFormsModule],
+    selector: 'atmah-chapter-title',
+    templateUrl: './chapter-title.component.html',
+    styleUrl: './chapter-title.component.scss',
+    imports: [ReactiveFormsModule]
 })
 export class ChapterTitleComponent
   extends KeypressRecordableComponent<DiaryPageState>

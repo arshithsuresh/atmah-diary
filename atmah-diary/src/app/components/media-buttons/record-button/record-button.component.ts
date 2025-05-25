@@ -2,9 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MediaButtonBase } from '../media-button.base';
 
 @Component({
-  selector: 'atmah-record-button',
-  templateUrl: './record-button.component.html',
-  styleUrl: './record-button.component.scss',
+    selector: 'atmah-record-button',
+    templateUrl: './record-button.component.html',
+    styleUrl: './record-button.component.scss',
+    standalone: false
 })
 export class RecordButtonComponent extends MediaButtonBase {
   @Output() onRecord: EventEmitter<void> = new EventEmitter();

@@ -30,6 +30,7 @@ import { KeyboardInput } from '../models/keyinput.model';
 
 @Component({
   template: '',
+  standalone: false,
 })
 export abstract class KeypressRecordableComponent<FState>
   implements AfterViewInit, OnDestroy

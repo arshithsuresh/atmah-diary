@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'atmah-media-button',
-  template: '',
-  styleUrl: './media-button.scss',
+    selector: 'atmah-media-button',
+    template: '',
+    styleUrl: './media-button.scss',
+    standalone: false
 })
 export abstract class MediaButtonBase {
   @Input('disabled') disabled: boolean = false;

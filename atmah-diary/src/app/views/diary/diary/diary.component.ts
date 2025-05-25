@@ -4,11 +4,10 @@ import { KeypressRecordableComponent } from '../../../base/RecordableComponent.b
 import { DiaryPageState } from '../../../store/diary-feature';
 
 @Component({
-  selector: 'atmah-diary',
-  standalone: true,
-  templateUrl: './diary.component.html',
-  styleUrl: './diary.component.scss',
-  imports: [ReactiveFormsModule],
+    selector: 'atmah-diary',
+    templateUrl: './diary.component.html',
+    styleUrl: './diary.component.scss',
+    imports: [ReactiveFormsModule]
 })
 export class DiaryComponent
   extends KeypressRecordableComponent<DiaryPageState>

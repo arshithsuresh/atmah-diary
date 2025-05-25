@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 @Component({
-  selector: 'atmah-single-line-input',
-  standalone: true,
-  imports: [],
-  templateUrl: './single-line-input.component.html',
-  styleUrl: './single-line-input.component.scss',
+    selector: 'atmah-single-line-input',
+    imports: [],
+    templateUrl: './single-line-input.component.html',
+    styleUrl: './single-line-input.component.scss'
 })
 export class SingleLineInputComponent {
   @Input('placeholder') placeholder: string = '';

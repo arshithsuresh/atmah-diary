@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { MediaButtonBase } from '../media-button.base';
 
 @Component({
-  selector: 'atmah-replay-button',
-  templateUrl: './replay-button.component.html',
-  styleUrl: './replay-button.component.scss',
+    selector: 'atmah-replay-button',
+    templateUrl: './replay-button.component.html',
+    styleUrl: './replay-button.component.scss',
+    standalone: false
 })
 export class ReplayButtonComponent extends MediaButtonBase {}

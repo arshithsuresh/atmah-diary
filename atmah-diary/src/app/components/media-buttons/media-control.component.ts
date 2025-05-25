@@ -3,9 +3,10 @@ import { IMediaControlService } from '../../iservices/IMediaControlService';
 import { CAN_RECORD_TOKEN } from '../../tokens/can-record.token';
 
 @Component({
-  selector: 'atmah-media-control',
-  templateUrl: './media-control.component.html',
-  styleUrl: './media-control.component.scss',
+    selector: 'atmah-media-control',
+    templateUrl: './media-control.component.html',
+    styleUrl: './media-control.component.scss',
+    standalone: false
 })
 export class MediaControlComponent {
   get isPaused() {

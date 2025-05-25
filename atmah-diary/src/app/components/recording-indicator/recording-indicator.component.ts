@@ -2,11 +2,10 @@ import { Component, HostBinding } from '@angular/core';
 import { IMediaControlService } from '../../iservices/IMediaControlService';
 
 @Component({
-  selector: 'atmah-recording-indicator',
-  standalone: true,
-  imports: [],
-  templateUrl: './recording-indicator.component.html',
-  styleUrl: './recording-indicator.component.scss',
+    selector: 'atmah-recording-indicator',
+    imports: [],
+    templateUrl: './recording-indicator.component.html',
+    styleUrl: './recording-indicator.component.scss'
 })
 export class RecordingIndicatorComponent {
   @HostBinding('class.recording') get recording() {
