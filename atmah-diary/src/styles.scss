@@ -1,11 +1,11 @@
+@use './styles/fonts/index' as *;
+@use './styles/common/index' as *;
+@use 'dark/colors.scss' as *;
+@use 'light/colors.scss' as *;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './styles/fonts/index';
-@import './styles/common/index';
-@import 'dark/colors.scss';
-@import 'light/colors.scss';
 
 * {
   box-sizing: border-box;

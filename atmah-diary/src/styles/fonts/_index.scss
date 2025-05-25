@@ -1,9 +1,9 @@
-@use './indie-flower.scss';
-@use './satisfy.scss';
-@use './square-peg.scss';
-@use './zeyada.scss';
-@use './im-english-sc.scss';
-@use './im-english.scss';
+@forward './indie-flower.scss';
+@forward './satisfy.scss';
+@forward './square-peg.scss';
+@forward './zeyada.scss';
+@forward './im-english-sc.scss';
+@forward './im-english.scss';
 
 body {
   --primary-font: 'IM Fell English', serif;

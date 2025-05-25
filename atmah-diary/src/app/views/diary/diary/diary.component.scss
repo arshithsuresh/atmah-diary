@@ -1,5 +1,5 @@
-@import 'theme';
-@import '../../../../styles//mixins/responsive';
+@use 'theme' as *;
+@use '../../../../styles//mixins/responsive' as *;
 
 .diary-book-container {
   display: flex;
