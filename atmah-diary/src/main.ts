@@ -6,12 +6,14 @@ import { environment } from './environment/environment';
 if (environment.production) {
   window.console.log = (msg, ...options) => {};
 } else {
-  window.console.log = (msg, ...options) => {
-    console.warn(msg, options);
-    const pTag = document.createElement('p');
-    pTag.innerHTML = msg;
-    document.getElementById('logger-div')?.append(pTag);
-  };
+  if (environment.viewConsole) {
+    window.console.log = (msg, ...options) => {
+      console.warn(msg, options);
+      const pTag = document.createElement('p');
+      pTag.innerHTML = msg;
+      document.getElementById('logger-div')?.append(pTag);
+    };
+  }
 }
 
 bootstrapApplication(AppComponent, appConfig).catch(err => console.error(err));

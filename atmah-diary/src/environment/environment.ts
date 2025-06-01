@@ -1,4 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   mode: 'Dev',
+  viewConsole: false,
 };

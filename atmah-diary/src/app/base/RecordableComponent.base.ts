@@ -25,7 +25,6 @@ import { FormControl } from '@angular/forms';
 import { CAN_RECORD_TOKEN } from '../tokens/can-record.token';
 import { SharedActionsService } from '../views/diary/services/shared-actions.service';
 import { IKeyListenerService } from '../iservices/IKeyListenerService';
-import { PhysicalKeyboardListenerService } from '../views/diary/services/physical-keyboard-listener.service';
 import { KeyboardInput } from '../models/keyinput.model';
 
 @Component({
@@ -128,13 +127,7 @@ export abstract class KeypressRecordableComponent<FState>
     console.log(`INPUT :: ${this.recorderId}`, input);
   }
   addEventListeners() {
-    // this.recorderElement.nativeElement.onkeypress = this.onKeyDown.bind(this);
-
-    // this.keyListeners.registerKeyDown(
-    //   this.recorderElement,
-    //   this.testKeyDown.bind(this)
-    // );
-
+    this.recorderElement.nativeElement.onkeypress = this.onKeyDown.bind(this);
     this.recorderElement.nativeElement.onclick = this.onMouseDown.bind(this);
     this.recorderElement.nativeElement.onselect = this.onDragEnter.bind(this);
   }
@@ -164,14 +157,8 @@ export abstract class KeypressRecordableComponent<FState>
   }
 
   onKeyDown(event: KeyboardEvent) {
-    event.preventDefault();
-    console.log(event.location);
     if (!this.canRecordKeys(event)) {
-      //return;
     }
-
-    this.recordControl.setValue(this.recordControl.value + 's');
-
     this.keyStrokeRecorder.recordAction(event, this.recorderId);
 
     if (event.code == 'Enter') {

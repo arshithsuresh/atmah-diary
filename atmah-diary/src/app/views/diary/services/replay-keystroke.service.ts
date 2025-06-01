@@ -64,7 +64,7 @@ export class ReplayKeystrokeService extends IReplayService {
   getKeyStrokeData() {}
 
   playKeystrokeSound(character: string) {
-    if (this.speed >= 4 || this.waitTime <= 50) return;
+    if (this.speed > 4 || this.waitTime <= 50) return;
 
     switch (character) {
       case KeyCodeMapping.get(AvailableKeyCodes.Backspace):
