@@ -1,11 +1,11 @@
-import * as controllers from "../contollers/controller";
+import authRoutes from "./auth";
+import userRoutes from "./user";
+import diaryRoutes from "./diary";
 import { Router } from "express";
 
-const myController = controllers;
-
 const router = Router();
-
-router.get("/", myController.method1);
-router.post("/", myController.method2);
+router.use("/auth", authRoutes);
+router.use("/diary", diaryRoutes);
+router.use("/user", userRoutes);
 
 export default router;
